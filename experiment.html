@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Blink Task</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="jspsych-5.0/jspsych.js"></script>
+        <script src="jspsych-5.0/plugins/jspsych-text.js"></script>
+        <script src="jspsych-5.0/plugins/jspsych-single-stim.js"></script>
+        <link href="jspsych-5.0/css/jspsych.css" rel="stylesheet" type="text/css">
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div class = "parent">
+            <div class = "child">
+                <div id="jspsych_target"></div>
+            </div>
+        </div>
+    </body>
+    <script>
+
+        var id = prompt('Please enter your ID');
+        /*this is how I write comments in this language apparently */
+
+        var wid = screen.width;
+        var heig = screen.height;
+
+        var nums = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,14],
+            ranNums = [],
+            i = nums.length,
+            j = 0;
+
+        while (i--) {
+            j = Math.floor(Math.random() * (i+1));
+            ranNums.push(nums[j]);
+            nums.splice(j,1);
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        var instructions_max_round_begin = {
+            type: "text",
+            text: "In den nächsten 2 Runden wollen wir testen \n\n wie schnell Sie es schaffen die 5 weißen Quadrate \n\n innerhalb von 10 Sekunden zu treffen.\n\n" +
+                  "Diese Runden sind sehr wichtig für den BONUS !\n\n\n Sie sehen nun einen Countdown, der von 3 bis 1 herunterzählt. \n\n\n\n" +
+                  "(Drücken Sie ENTER um fortzufahren)",
+            timing_post_trial: 0
+        };
+
+
+        var instructions_max_round_end = {
+            type: "text",
+            text: "Vielen Dank \n\n\n\n Bitte warten Sie auf weitere Instruktionen",
+            timing_post_trial: 0
+        };
+
+        var instructions_main = {
+            type: "text",
+            text: "Bitte sorgfältig lesen! \n\n\n" +
+            "In diesem Teil nehmen Sie an einem Leistungsexperiment teil mit, \n\n" +
+            "wobei Ihre Leistung mit demselben Geschicklichkeitsspiel gemessen wird. \n\n" +
+            "Dieser Teil besteht aus 30 Runden und funktioniert genauso wie die Übungsrunden. \n\n" +
+            "Jede Runde beginnt mit einer Ankündigung darüber wie viele Punkte \n\n" +
+            "Sie pro Quadrat erhalten können. Alle 2 Runden werden \n\n" +
+            "Ihre erreichten Punkte zu einer Gesamtpunkteanzahl addiert. \n\n\n\n" +
+            "(Drücken Sie ENTER um zur nächsten Seite fortzufahren)",
+            timing_post_trial: 0
+        };
+
+
+        var instructions_hand = {
+            type: "text",
+            text: "Bitte verwenden Sie während der gesamten Studie immer \n\n" +
+            "dieselbe Hand um die Pfeiltaste UNTEN zu drücken und wechseln Sie diese nicht! \n\n\n\n" +
+            "(Drücken Sie ENTER um fortzufahren)",
+            timing_post_trial: 0
+        };
+
+
+        var almost_start = {
+            type: "text",
+            text: "(Drücken Sie ENTER um zur nächsten Seite fortzufahren)"
+        };
+
+        var instructions_main = {
+            type: "text",
+            text: "When you a see a white square blink in the middle of the black screen " +
+            "I just want you to press <strong>space</strong> as fast as possible " +
+            "<p>Press <strong>space</strong> if you are ready to continue.</p> " +
+            "<p>Thanks</p>",
+            timing_post_trial: 0
+        };
+
+
+        var instructions_end = {
+            type: "text",
+            text: "Dies ist das Ende der Aufgabe \n\n\n Vielen Dank"
+        };
+
+            /* make an array of values for white block presentation */
+            /* randomly assign one of them to the stimulus being presented */
+            /* dependant on that, substract from a 1000 delay */
+
+
+            /* Helper functions and vavriables to initialzie the whole thing */
+
+            /* first, we want to define the possible sequence 1 and 2 (for round 1 and 2) */
+
+        var sequences = [[1000, 3500, 4750, 7000, 8500],
+                         [2750, 3750, 5000, 6500, 8250],
+                         [1000, 2250, 6000, 7000, 8500],
+                         [1250, 2500, 5000, 6500, 7750],
+                         [750, 2000, 4000, 5500, 6750],
+                         [2000, 3000, 4500, 6250, 7750],
+                         [750, 2250, 3250, 5000, 6750],
+                         [1000, 3250, 4250, 5750, 8750],
+                         [1250, 4500, 5750, 7500, 8750],
+                         [1750, 2750, 5750, 6750, 8000],
+                         [1500, 2750, 4500, 6000, 7500],
+                         [2500, 4000, 5000, 6500, 8000],
+                         [3250, 4250, 5750, 7750, 8750],
+                         [750, 3000, 4000, 5750, 6750],
+                         [1000, 2250, 5500, 7250, 8750]];
+
+
+        for(i=0;i<15;i++) {
+            sequences[i] = sequences[ranNums[i]]
+        }
+
+
+            /* we also need a timer going down for the 3s */
+
+        var initial_countdown = {
+            type: 'single-stim',
+            response_ends_trial: false,
+            timing_post_trial: 0,
+            timing_stim: 1000,
+            timing_response: 1000,
+            timeline: [
+                {stimulus: 'img/three.png'},
+                {stimulus: 'img/two.png'},
+                {stimulus: 'img/one.png'}
+            ]
+        };
+
+            /* We need a big countdown timer */
+
+        var main_countdown = {
+            type: 'single-stim',
+            response_ends_trial: false,
+            timing_post_trial: 0,
+            timing_stim: 1000,
+            timing_response: 1000,
+            timeline: [
+                {stimulus: 'img/ten.png'},
+                {stimulus: 'img/nine.png'},
+                {stimulus: 'img/eight.png'},
+                {stimulus: 'img/seven.png'},
+                {stimulus: 'img/six.png'},
+                {stimulus: 'img/five.png'},
+                {stimulus: 'img/four.png'},
+                {stimulus: 'img/three.png'},
+                {stimulus: 'img/two.png'},
+                {stimulus: 'img/one.png'}
+            ]
+        };
+
+
+            /* We want to create a value counter which depends on the persons points */
+
+            /* this is basically the main block */
+            /* this small variable is here to server as a delay buffer before the first
+        trial gets presented because I can't do it any other way for now */
+
+
+        var round_info_high = {
+            type: 'single-stim',
+            timing_stim: 2500,
+            timing_response: 2500,
+            timing_post_trial: 0,
+            response_ends_trial: false,
+            is_html: true,
+            timeline: [{stimulus: '<table width = 100% height=100%>' +
+                                  '<tr>' +
+                                  '<td style="text-align: center; vertical-align: middle;">' +
+                                  '<img src="img/big_points.png" /></td></tr><tr></table>',
+
+                        prompt: '<table width = 100% height=100%>' +
+                                '<tr>' +
+                                '<td style="text-align: center; vertical-align: middle;">' +
+                                '<p>In dieser Runde erhalten sie 9 Punkte pro Quadrat!</p></td></tr><tr></table>'}]
+        };
+
+
+
+        var round_info_low = {
+            type: 'single-stim',
+            timing_stim: 2500,
+            timing_response: 2500,
+            timing_post_trial: 0,
+            response_ends_trial: false,
+            is_html: true,
+            timeline: [{stimulus: '<table width = 100% height=100%>' +
+                                  '<tr>' +
+                                  '<td style="text-align: center; vertical-align: middle;">' +
+                                  '<img src="img/small_points.png" /></td></tr><tr></table>',
+
+                        prompt:   '<table width = 100% height=100%>' +
+                                  '<tr>' +
+                                  '<td style="text-align: center; vertical-align: middle;">' +
+                                  '<p>In dieser Runde erhalten sie 3 Punkte pro Quadrat!</p></td></tr><tr></table>'}]
+        };
+
+
+        var first_trial_buffer = {
+            type: 'single-stim',
+            timing_stim: sequences[0][0] - 100,
+            timing_response: sequences[0][0],
+            timing_post_trial: 0,
+            reseponse_ends_trial: false
+        };
+
+        var delay1 = sequences[0][1] - sequences[0][0] - 200;
+        var delay2 = sequences[0][2] - sequences[0][1] - 200;
+        var delay3 = sequences[0][3] - sequences[0][2] - 200;
+        var delay4 = sequences[0][4] - sequences[0][3] - 200;
+        var delay5 = 9800 - sequences[0][4];
+
+        var allow_resp1 = sequences[0][1] - sequences[0][0];
+        var allow_resp2 = sequences[0][2] - sequences[0][1];
+        var allow_resp3 = sequences[0][3] - sequences[0][2];
+        var allow_resp4 = sequences[0][4] - sequences[0][3];
+        var allow_resp5 = 10000 - sequences[0][4];
+
+        var points_low = 0;
+        var points_high = 0;
+        var final_points = 0;
+
+
+
+     /*   var trial = {
+            type: 'single-stim',
+            stimuli: function(){
+                var digit = digits[digit_index];
+                digit_index++;
+                return('<p>'+digit+'</p>');
+            },
+            is_html: true
+        }
+*/
+
+            var trial_seq_low = {
+                type: 'single-stim',
+                is_html: true,
+                choices: ['B'],
+                timing_stim: 200,
+                response_ends_trial: false,
+                data: {
+                    response: 'pressed',
+                    trial: 'low_points'
+                },
+                stimulus: '<img style="text-align: center; vertical-align: middle; height: 100%; height: 100%" src="img/block.png">',
+                timeline: [
+                    {
+                        timing_post_trial: delay1, timing_response: allow_resp1, prompt: function () {
+                        points_low = 0;
+/*                        if (res == 1) { */
+                        return "<p>" + points_low +"  </p>"}
+       /*                 else if (res == 0) {
+                            return "<p>" + points_low + "</p>"+
+                                '<table width = 100% height=100%><tr><td style="text-align: center; vertical-align: middle;"><img src="img/incorrect.png"/></td></tr><tr></table>'}
+                    }*/
+                    },
+                    {
+                        timing_post_trial: delay2, timing_response: allow_resp2, prompt: function () {
+                        return "<p>Punkte:" + points_low + " </p>"
+                    }
+                    },
+                    {
+                        timing_post_trial: delay3, timing_response: allow_resp1, prompt: function () {
+                        return "<p>Punkte:" + points_low + " </p>"
+                    }
+                    },
+                    {
+                        timing_post_trial: delay4, timing_response: allow_resp1, prompt: function () {
+                        return "<p>Punkte:" + points_low + " </p>"
+                    }
+                    },
+                    {
+                        timing_post_trial: delay5, timing_response: allow_resp1, prompt: function () {
+                        return "<p>Punkte:" + points_low + " </p>"
+                    }
+                    }
+                ],
+                on_finish: function (data) {
+                    if (data.rt >= 1 && data.rt <= 200) {
+                        points_low += 50;
+                        var res = 1
+                    }
+                    else if (data.rt >= 200 && data.rt < 400) {
+                        points_low += 20;
+                        res = 1
+                    }
+                    else if (data.rt >= 400 && data.rt < 500) {
+                        points_low += 5;
+                        res = 1
+                    }
+                    else if (data.rt >= 500 && data.rt < 600) {
+                        points_low += 2;
+                        res = 1
+                    }
+                    else if (data.rt >= 600 && data.rt < 700) {
+                        points_low += 1;
+                        res = 1
+                    } else {
+                        res = 0
+                    }
+                }
+            };
+
+            var trial_seq_high = {
+                type: 'single-stim',
+                is_html: true,
+                choices: ['B'],
+                timing_stim: 200,
+                timing_response: 200,
+                response_ends_trial: false,
+                data: {
+                    response: 'pressed',
+                    trial: 'high_points'
+                },
+                stimulus: '<img style="text-align: center; vertical-align: middle; width:5vw; height:5vw" src="img/block.png">',
+                timeline: [
+                    {
+                        timing_post_trial: delay1, prompt: function () {
+                        return "<p>Punkte:" + points_high + " </p>"
+                    }
+                    },
+                    {
+                        timing_post_trial: delay2, prompt: function () {
+                        return "<p>Punkte:" + points_high + " </p>"
+                    }
+                    },
+                    {
+                        timing_post_trial: delay3, prompt: function () {
+                        return "<p>Punkte:" + points_high + " </p>"
+                    }
+                    },
+                    {
+                        timing_post_trial: delay4, prompt: function () {
+                        return "<p>Punkte:" + points_high + " </p>"
+                    }
+                    },
+                    {
+                        timing_post_trial: delay5, prompt: function () {
+                        return "<p>Punkte:" + points_high + " </p>"
+                    }
+                    }
+                ],
+                on_finish: function (data) {
+                    if (data.rt >= 1 && data.rt <= 200) {
+                        points_high += 500;
+                        var res = 1;
+                        return '<table width = 100% height=100%><tr><td style="text-align: center; vertical-align: middle;"><img src="img/correct.png"/></td></tr><tr></table>'
+                    }
+                    else if (data.rt >= 200 && data.rt < 400) {
+                        points_high += 200;
+                        return '<table width = 100% height=100%><tr><td style="text-align: center; vertical-align: middle;"><img src="img/correct.png"/></td></tr><tr></table>'
+                    }
+                    else if (data.rt >= 400 && data.rt < 500) {
+                        points_high += 100;
+                        return '<table width = 100% height=100%><tr><td style="text-align: center; vertical-align: middle;"><img src="img/correct.png"/></td></tr><tr></table>'
+                    }
+                    else if (data.rt >= 500 && data.rt < 600) {
+                        points_high += 50;
+                        return '<table width = 100% height=100%><tr><td style="text-align: center; vertical-align: middle;"><img src="img/correct.png"/></td></tr><tr></table>'
+                    }
+                    else if (data.rt >= 600 && data.rt < 700) {
+                        points_high += 10;
+                        return '<table width = 100% height=100%><tr><td style="text-align: center; vertical-align: middle;"><img src="img/correct.png"/></td></tr><tr></table>'
+                    } else {
+                        return '<table width = 100% height=100%><tr><td style="text-align: center; vertical-align: middle;"><img src="img/incorrect.png"/></td></tr><tr></table>'
+                    }
+                    return points_high
+                }
+            };
+
+  /*      var feedback_pic = {
+            type: 'single-stim',
+            timing_stim: 200,
+            is_html: true,
+            stimulus: function() {if (res ==1) {return '<img src= "img/correct.png">'} else if (res == 0) {return '<img src= "img/correct.png">'}},
+        }; */
+
+        final_points = points_low + points_high;
+
+        var total_points = {
+            type: 'single-stim',
+            stimulus: final_points,
+            timing_stim: 2000,
+            response_ends_trial: false,
+            timing_post_trial: 0,
+            timing_response: 1
+        };
+
+        var core_node_low = {
+            timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high]
+        };
+
+        var core_node_high = {
+            timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low]
+        };
+
+        /* this is used to initialize the correct sequence */
+        var time = [];
+
+        /* to start the experiment */
+
+         time.push(instructions_max_round_begin);
+         time.push(instructions_max_round_end);
+         time.push(instructions_main);
+         time.push(instructions_hand);
+         time.push(instructions_end);
+         
+        for(i=0;i<15;i++) {
+            var curr_seq = getRandomInt(0, 2);
+            if (curr_seq == 0) {
+                time.push(core_node_low);
+    /*            instruct.push(feedback_pic); */
+                time.push(total_points);
+            } else if (curr_seq == 1) {
+                time.push(core_node_high);
+                time.push(total_points);
+            }
+        }
+
+        /* smallest unit of the task is an empty screen with number showing
+        followed by a brief presentation of the stimulus, duration independent
+        of participant response, followed by current */
+
+        jsPsych.init({
+            timeline: time,
+            display_element: $('#jspsych_target'),
+            default_iti: 0,
+            on_finish: function() {
+                $.ajax({
+                    type: "post",
+                    url: "/experiment-data",
+                    data: JSON.stringify(jsPsych.data.getData()),
+                    contentType: "application/json"
+                })
+                    .done(function () {
+                        window.location.href = "finish";
+                    })
+                    .fail(function () {
+                        alert("a problem occurred while writing to the database. plaese contact the research for more information.")
+                        window.location.href = "/";
+                    })
+            }
+            });
+    </script>
+</html>
+
+
