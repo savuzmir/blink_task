@@ -448,7 +448,7 @@
             default_iti: 0,
             on_finish: function() {
                 $.ajax({
-                    type: "post",
+                    type: "POST",
                     url: "/experiment-data",
                     data: JSON.stringify(jsPsych.data.getData()),
                     contentType: "application/json"
@@ -457,7 +457,7 @@
                         window.location.href = "finish";
                     })
                     .fail(function () {
-                        alert("a problem occurred while writing to the database. plaese contact the research for more information.")
+                        alert("a problem occurred while writing to the database. plaese contact the research for more information.");
                         window.location.href = "/";
                     })
             }

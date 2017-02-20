@@ -12,9 +12,7 @@ var express = require('express'),
 var app = express();
 
 // setting up moongoose
-//mongoose.connect('mongodb://localhost/jspsych');
-mongoose.connect(process.env.CONNECTION);
-
+mongoose.connect(process.env.CONNECTION || 'mongodb://localhost/jspsych');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function callback() {
@@ -54,11 +52,13 @@ app.post('/experiment-data', function(request, response){
         "data":request.body
     });
     response.end();
-})
+});
 
 // starting the server
-var server = app.listen(process.env.PORT, function(){
+var server = app.listen(process.env.PORT || 3000, function(){
     console.log("Listening on port %d", server.address().port);
 });
+
+
 
 
