@@ -12,7 +12,7 @@ var express = require('express'),
 var app = express();
 
 // setting up moongoose
-mongoose.connect(process.env.CONNECTION || 'mongodb://localhost/jspsych');
+mongoose.connect('mongodb://nbu_online_user:NbuDatabasePassword2016@ds155509.mlab.com:55509/jspsych_db' || 'mongodb://localhost/jspsych');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function callback() {
