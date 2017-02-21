@@ -12,7 +12,7 @@ var express = require('express'),
 var app = express();
 
 // setting up moongoose
-mongoose.connect('mongodb://localhost/jspsych');
+mongoose.connect('mongodb://nbu_online_user:NbuDatabasePassword@ds155509.mlab.com:55509/jspsych_db');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function callback() {
@@ -24,7 +24,7 @@ var Entry = mongoose.model('Entry', emptySchema);
 
 // static middleware
 app.use(express.static(__dirname));
-app.use('/jsPsych', express.static(__dirname + "/jsPsych-5.0"));
+app.use('/jsPsych', express.static(__dirname + "/jspsych-5.9"));
 
 // body parsing middleware
 app.use(body_parser.json());
@@ -55,7 +55,7 @@ app.post('/experiment-data', function(request, response){
 });
 
 // starting the server
-var server = app.listen(process.env.PORT || 3000, function(){
+var server = app.listen(process.env.PORT, function(){
     console.log("Listening on port %d", server.address().port);
 });
 

@@ -1,4 +1,4 @@
-/**
+/**b
  * jspsych-single-stim
  * Josh de Leeuw
  *
@@ -9,11 +9,11 @@
  **/
 
 
-jsPsych.plugins["single-stim"] = (function() {
+jsPsych.plugins["single-stim-special"] = (function() {
 
   var plugin = {};
 
-  jsPsych.pluginAPI.registerPreload('single-stim', 'stimulus', 'image');
+  jsPsych.pluginAPI.registerPreload('single-stim-special', 'stimulus', 'image');
 
   plugin.trial = function(display_element, trial) {
 
@@ -29,6 +29,7 @@ jsPsych.plugins["single-stim"] = (function() {
     trial.timing_response = trial.timing_response || -1;
     trial.is_html = (typeof trial.is_html == 'undefined') ? false : trial.is_html;
     trial.prompt = trial.prompt || "";
+    trial.pic_prompt = trial.pic_prompt || "";
 
     // this array holds handlers from setTimeout calls
     // that need to be cleared if the trial ends early
@@ -47,10 +48,10 @@ jsPsych.plugins["single-stim"] = (function() {
       }));
     }
 
-    //show prompt if there is one
-    if (trial.prompt !== "") {
-      display_element.append(trial.prompt);
-    }
+      //show prompt if there is one
+      if (trial.prompt !== "") {
+          display_element.append(trial.prompt);
+      }
 
     // store response
     var response = {
@@ -89,6 +90,24 @@ jsPsych.plugins["single-stim"] = (function() {
 
     // function to handle responses by the subject
     var after_response = function(info) {
+
+        if (!trial.is_html) {
+            display_element.append($('<img>', {
+                src: trial.pic_prompt,
+                id: 'jspsych-single-stim-pic-prompt'
+            }));
+        } else {
+            display_element.append($('<div>', {
+                html: trial.pic_prompt,
+                id: 'jspsych-single-stim-pic-prompt'
+            }));
+        }
+        if (trial.timing_stim > 0) {
+            var t8 = setTimeout(function() {
+                $('#jspsych-single-stim-pic-prompt').css('visibility', 'hidden');
+            }, trial.timing_stim);
+            setTimeoutHandlers.push(t8);
+        }
 
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
