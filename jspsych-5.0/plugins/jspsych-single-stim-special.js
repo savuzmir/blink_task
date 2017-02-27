@@ -102,6 +102,11 @@ jsPsych.plugins["single-stim-special"] = (function() {
                 id: 'jspsych-single-stim-pic-prompt'
             }));
         }
+        // new //
+        if (trial.prompt !== "") {
+            display_element.append(trial.prompt);
+        }
+        // new // 
         if (trial.timing_stim > 0) {
             var t8 = setTimeout(function() {
                 $('#jspsych-single-stim-pic-prompt').css('visibility', 'hidden');
