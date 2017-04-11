@@ -88,7 +88,7 @@ jsPsych.plugins["single-stim-special"] = (function() {
 
       display_element.html('');
 
-      if (trial.condition == 0) {
+      if (trial.condition == -1) {
         if (info.rt >= 1 && info.rt <= 200) {
             points_low += 20}
         else if (info.rt >= 200 && info.rt < 400) {
@@ -98,26 +98,26 @@ jsPsych.plugins["single-stim-special"] = (function() {
         else if (info.rt >= 500 && info.rt < 600) {
             points_low += 2}
       if (press==0 && info.rt < 600) {
-          display_element.append(function () {return "<p align='left'> Punkte: "+points_low+" </p>"});
+          display_element.append(function () {return "<div style=' position: inherit;'><p>Punkte: "+points_low+" </p></div>"});
           display_element.append($('<div>', {
-            html: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/correct.png">',
               id: 'jspsych-single-stim-pic-prompt'
         }))}
       else if (press==0 && info.rt > 600) {
-          display_element.append(function () {return "<p>Punkte: "+points_low+" </p>"});
+          display_element.append(function () {return "<div style=' position: inherit;'><p>Punkte: "+points_low+" </p></div>"});
           display_element.append($('<div>', {
-            html: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/incorrect.png">',
+            html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/incorrect.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
-      else if (trial.condition == 1) {
+      else {
           points_low = points_low -10;
-        display_element.append(function () {return "<p>Punkte: "+points_low+" </p>"});
+        display_element.append(function () {return "<div style=' position: inherit;'><p>Punkte: "+points_low+" </p></div>"});
         display_element.append($('<div>', {
-          html: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/incorrect.png">',
+          html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/incorrect.png">',
             id: 'jspsych-single-stim-pic-prompt'
         }));
       }}
-      else {
+      else if (trial.condition == 1) {
         if (info.rt >= 1 && info.rt <= 200) {
             points_high  += 200}
         else if (info.rt >= 200 && info.rt < 400) {
@@ -127,22 +127,22 @@ jsPsych.plugins["single-stim-special"] = (function() {
         else if (info.rt >= 500 && info.rt < 600) {
             points_high += 20}
         if (press==0 && info.rt < 600) {
-          display_element.append(function () {return "<p>Punkte: "+points_high+" </p>"});
+          display_element.append(function () {return "<div style=' position: inherit;'><p>Punkte: "+points_high+" </p></div>"});
           display_element.append($('<div>', {
-            html: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/correct.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
         else if (press==0 && info.rt > 600) {
-                display_element.append(function () {return "<p>Punkte: "+points_high+" </p>"});
+                display_element.append(function () {return "<div style=' position: inherit;'><p>Punkte: "+points_high+" </p></div>"});
                 display_element.append($('<div>', {
-                    html: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/incorrect.png">',
+                    html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/incorrect.png">',
                     id: 'jspsych-single-stim-pic-prompt'
                 }))}
         else {
           points_high = points_high -10;
-          display_element.append(function () {return "<p>Punkte: "+points_high+" </p>"});
+          display_element.append(function () {return "<div style=' position: inherit;'><p>Punkte: "+points_high+" </p></div>"});
           display_element.append($('<div>', {
-            html: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/incorrect.png">',
+            html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/incorrect.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
       }
