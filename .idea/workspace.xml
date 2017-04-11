@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fbf38ba9-da01-4f7e-89cb-a1efb37d6718" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experiment.html" afterPath="$PROJECT_DIR$/experiment.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jspsych-5.0/plugins/jspsych-single-stim-special.js" afterPath="$PROJECT_DIR$/jspsych-5.0/plugins/jspsych-single-stim-special.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/style.css" afterPath="$PROJECT_DIR$/style.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,8 +23,8 @@
       <file leaf-file-name="experiment.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiment.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11025">
-              <caret line="735" column="28" lean-forward="true" selection-start-line="735" selection-start-column="28" selection-end-line="735" selection-end-column="28" />
+            <state relative-caret-position="-75">
+              <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
               <folding>
                 <marker date="1491909374533" expanded="true" signature="42827:42879" ph="..." />
                 <marker date="1491909374533" expanded="true" signature="46929:46981" ph="..." />
@@ -42,34 +40,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="jspsych-single-stim-special.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jspsych-5.0/plugins/jspsych-single-stim-special.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="100" column="85" lean-forward="false" selection-start-line="100" selection-start-column="85" selection-end-line="100" selection-end-column="85" />
+            <state relative-caret-position="780">
+              <caret line="142" column="114" lean-forward="false" selection-start-line="142" selection-start-column="114" selection-end-line="142" selection-end-column="114" />
               <folding>
-                <marker date="1491910490855" expanded="true" signature="3014:3033" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="3153:3205" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="3406:3425" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="3545:3597" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="3808:3827" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="3943:3995" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="4570:4589" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="4710:4762" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="4973:4992" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="5127:5179" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="5408:5427" ph="..." />
-                <marker date="1491910490855" expanded="true" signature="5548:5600" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="3012:3062" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="3179:3231" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="3430:3480" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="3597:3649" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="3858:3908" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="4021:4073" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="4646:4696" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="4814:4866" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="5075:5125" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="5257:5309" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="5536:5586" ph="..." />
+                <marker date="1491914170427" expanded="true" signature="5704:5756" ph="..." />
               </folding>
             </state>
           </provider>
@@ -373,12 +361,12 @@
       <workItem from="1490604256201" duration="3984000" />
       <workItem from="1490697116635" duration="1822000" />
       <workItem from="1491811781790" duration="16302000" />
-      <workItem from="1491896176956" duration="12944000" />
+      <workItem from="1491896176956" duration="14848000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="300398000" />
+    <option name="totallyTimeSpent" value="302302000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1011" extended-state="6" />
@@ -859,24 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11025">
-          <caret line="735" column="28" lean-forward="true" selection-start-line="735" selection-start-column="28" selection-end-line="735" selection-end-column="28" />
-          <folding>
-            <marker date="1491909374533" expanded="true" signature="42827:42879" ph="..." />
-            <marker date="1491909374533" expanded="true" signature="46929:46981" ph="..." />
-            <marker date="1491909374533" expanded="true" signature="51031:51083" ph="..." />
-            <marker date="1491909374533" expanded="true" signature="55122:55174" ph="..." />
-            <marker date="1491909374533" expanded="true" signature="59223:59275" ph="..." />
-            <marker date="1491909374533" expanded="true" signature="63328:63380" ph="..." />
-            <marker date="1491909374533" expanded="true" signature="67433:67485" ph="..." />
-            <marker date="1491909374533" expanded="true" signature="75531:75583" ph="..." />
-            <marker date="1491909374533" expanded="true" signature="79637:79689" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jspsych-5.0/css/jspsych.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-465">
@@ -901,23 +871,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/experiment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-75">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding>
+            <marker date="1491909374533" expanded="true" signature="42827:42879" ph="..." />
+            <marker date="1491909374533" expanded="true" signature="46929:46981" ph="..." />
+            <marker date="1491909374533" expanded="true" signature="51031:51083" ph="..." />
+            <marker date="1491909374533" expanded="true" signature="55122:55174" ph="..." />
+            <marker date="1491909374533" expanded="true" signature="59223:59275" ph="..." />
+            <marker date="1491909374533" expanded="true" signature="63328:63380" ph="..." />
+            <marker date="1491909374533" expanded="true" signature="67433:67485" ph="..." />
+            <marker date="1491909374533" expanded="true" signature="75531:75583" ph="..." />
+            <marker date="1491909374533" expanded="true" signature="79637:79689" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/jspsych-5.0/plugins/jspsych-single-stim-special.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="100" column="85" lean-forward="false" selection-start-line="100" selection-start-column="85" selection-end-line="100" selection-end-column="85" />
+        <state relative-caret-position="780">
+          <caret line="142" column="114" lean-forward="false" selection-start-line="142" selection-start-column="114" selection-end-line="142" selection-end-column="114" />
           <folding>
-            <marker date="1491910490855" expanded="true" signature="3014:3033" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="3153:3205" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="3406:3425" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="3545:3597" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="3808:3827" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="3943:3995" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="4570:4589" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="4710:4762" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="4973:4992" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="5127:5179" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="5408:5427" ph="..." />
-            <marker date="1491910490855" expanded="true" signature="5548:5600" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="3012:3062" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="3179:3231" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="3430:3480" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="3597:3649" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="3858:3908" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="4021:4073" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="4646:4696" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="4814:4866" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="5075:5125" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="5257:5309" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="5536:5586" ph="..." />
+            <marker date="1491914170427" expanded="true" signature="5704:5756" ph="..." />
           </folding>
         </state>
       </provider>
