@@ -8,7 +8,6 @@
  *
  **/
 
-
 jsPsych.plugins["single-stim-special-max"] = (function() {
 
   var plugin = {};
