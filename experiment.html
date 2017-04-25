@@ -17,10 +17,31 @@
         <div class = "parent">
             <div class = "child">
                 <div id="jspsych_target"></div>
+                <span id="countdown" style="font-weight: bold; font-size: xx-large; position:absolute; left: 2.5pc; top: 2.5pc">10</span>
             </div>
         </div>
     </body>
     <script>
+
+
+        var timeInSecs;
+        var ticker;
+
+        function startTimer(secs){
+            timeInSecs = parseInt(secs)-1;
+            ticker = setInterval("tick()",1000);   // every second
+        }
+
+        function tick() {
+            var secs = timeInSecs;
+            if (secs>0) {
+                timeInSecs--;
+            }
+            else {
+                clearInterval(ticker); // stop counting at zero
+            }
+            document.getElementById("countdown").innerHTML = secs;
+        }
 
         var id = prompt('Please enter your ID');
 
@@ -131,15 +152,16 @@
             /* we also need a timer going down for the 3s */
 
         var initial_countdown = {
+            is_html: true,
             type: 'single-stim',
             response_ends_trial: false,
             timing_post_trial: 0,
-            timing_stim: 1000,
+            timing_stim: 750,
             timing_response: 1000,
             timeline: [
-                {stimulus: 'img/three.png'},
-                {stimulus: 'img/two.png'},
-                {stimulus: 'img/one.png'}
+                {stimulus: function() {return '<p style="font-size: 72pt">3</p>'}},
+                {stimulus: function() {return '<p style="font-size: 72pt">2</p>'}},
+                {stimulus: function() {return '<p style="font-size: 72pt">1</p>'}}
             ]
         };
 
@@ -149,7 +171,7 @@
             type: 'single-stim',
             response_ends_trial: false,
             timing_post_trial: 0,
-            timing_stim: 1000,
+            timing_stim: 750,
             timing_response: 1000,
             timeline: [
                 {stimulus: 'img/ten.png'},
@@ -172,30 +194,30 @@
 
         var round_info_high = {
             type: 'single-stim',
-            timing_stim: 5000,
+            timing_stim: 7500,
             timing_response: 2500,
             timing_post_trial: 0,
             response_ends_trial: false,
             is_html: true,
             timeline: [{stimulus:'<img src="img/big_points.png" />',
-                        prompt: '<p>In dieser Runde können Sie pro Quadrat <b><b></b></b> 10 bis 100 Punkte erreichen!</p>'}]
+                        prompt: '<p style="font-size: 36pt">In dieser Runde können Sie pro Quadrat <b><b></b></b> 10 bis 100 Punkte erreichen!</p>'}]
         };
 
         var round_info_low = {
             type: 'single-stim',
-            timing_stim: 5000,
+            timing_stim: 7500,
             timing_response: 2500,
             timing_post_trial: 0,
             response_ends_trial: false,
             is_html: true,
             timeline: [{stimulus: '<img src="img/small_points.png" />',
-                        prompt: '<p>In dieser Runde können Sie pro Quadrat <b><b></b></b> 1 bis 10 Punkte erreichen!</p>'}]
+                        prompt: '<p style="font-size: 36pt">In dieser Runde können Sie pro Quadrat <b><b></b></b> 1 bis 10 Punkte erreichen!</p>'}]
         };
 
 
         var first_trial_buffer = {
             type: 'single-stim',
-            timing_stim: sequences[0][0] - 100,
+            timing_stim: sequences[0][0] - 75,
             timing_response: sequences[0][0],
             timing_post_trial: 0,
             reseponse_ends_trial: false
@@ -457,29 +479,20 @@
             condition: -1,
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
                 trial: 'low_points',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1},
+                    {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1},
                 {timing_post_trial: 0, timing_response: allow_resp2_1+delay2_1},
                 {timing_post_trial:0, timing_response: allow_resp3_1+delay3_1},
                 {timing_post_trial: 0, timing_response: allow_resp4_1+delay4_1},
                 {timing_post_trial: 0, timing_response: allow_resp5_1+delay5_1}],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
+            on_finish: function () {
+                jsPsych.data.addDataToLastTrial({points: points_low});
             }
         };
 
@@ -488,54 +501,41 @@
             condition: 1,
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
                 trial: 'high_points',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8},
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8},
                 {timing_post_trial: 0, timing_response: allow_resp2_8+delay2_8},
                 {timing_post_trial:0, timing_response: allow_resp3_8+delay3_8},
                 {timing_post_trial: 0, timing_response: allow_resp4_8+delay4_8},
                 {timing_post_trial: 0, timing_response: allow_resp5_8+delay5_8}],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
+            on_finish: function () {
+                jsPsych.data.addDataToLastTrial({points: points_high});
             }
         };
 
         /////////////////////////////////////////////////
         /* END MAX ROUND */
         ////////////////////////////////////////////////
-
-
         ////////////////////////////////////////////////
         /* Calculating RTs */
         ////////////////////////////////////////////////
 
+        function getSubjectData() {
 
-         function getSubjectData() {
+             var trials = jsPsych.data.getTrialsOfType('single-stim-special-max');
 
-         var trials = jsPsych.data.getTrialsOfType('single-stim-special-max');
-
-         var sum_rt = 0;
-         var correct_rt_count = 0;
-         for (var i = 0; i < trials.length; i++) {
-            if(trials[i].rt > -1){
-                sum_rt += trials[i].rt;
-                correct_rt_count++;}}
-         return {
-         rt: Math.floor(sum_rt / correct_rt_count)}}
+             var sum_rt = 0;
+             var rt_count = 0;
+             for (var i = 0; i < trials.length; i++) {
+                if(trials[i].rt > -1){
+                    sum_rt += trials[i].rt;
+                    rt_count++;}}
+         return {rt: Math.floor(sum_rt / rt_count)}}
 
         ////////////////////////////////////////////////
         /* Finished RTs */
@@ -545,6 +545,19 @@
         ////////////////////////////////////////////////
         /* ROUND ONE */
         ////////////////////////////////////////////////
+        var debrief_block = {
+            type: "text",
+            text: function() {
+                var subject_data = getSubjectData();
+                return "<p>Your average response time was <strong>" +
+                    subject_data.rt + "ms</strong>. Press any key to complete the "+
+                    "experiment. Thank you!</p>";
+            },
+            on_finish: function() {
+                var subject_data = getSubjectData();
+                jsPsych.data.addProperties({mean_rt: subject_data.rt});
+        }};
+
 
         var trial_seq_low_1 = {
             type: 'single-stim-special',
@@ -552,44 +565,31 @@
             reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points'},
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_low+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_2+delay2_2,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_2+delay2_2,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_low+" </>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_2+delay3_2,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_2+delay3_2,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_low+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_2+delay4_2,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_2+delay4_2,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_low+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_2+delay5_2,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_2+delay5_2,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_low+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ],
-            on_finish: function (data, sub_info) {
-                if (data.rt >= 1 && data.rt <= sub_info) {
-                    points_low += 0}
-                else if (data.rt >= sub_info && data.rt < sub_info) {
-                    points_low += 0}
-                else if (data.rt >= sub_info && data.rt < sub_info) {
-                    points_low += 0}
-                else if (data.rt >= sub_info && data.rt < sub_info) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
             }
         };
 
@@ -599,45 +599,55 @@
             reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
                     prompt: function () {points_high = 0;
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_9+delay2_9,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_9+delay2_9,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_9+delay3_9,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_9+delay3_9,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_9+delay4_9,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_9+delay4_9,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_9+delay5_9,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_9+delay5_9,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20.25pc'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ],
-            on_finish: function (data, sub_info) {
-                if (data.rt >= 1 && data.rt <= sub_info) {
-                    points_high += 0}
-                else if (data.rt >= sub_info && data.rt < sub_info) {
-                    points_high += 0}
-                else if (data.rt >= sub_info && data.rt < sub_info) {
-                    points_high += 0}
-                else if (data.rt >= sub_info && data.rt < sub_info) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
             }
+   /*         on_finish: function (data, getSubjectData) {
+                if (data.rt >= 1 && data.rt <= (debrief_block - 150)) {
+                    points_high += 0}
+                else if (data.rt >= (getSubjectData.rt-150) && data.rt < (getSubjectData.rt-100)) {
+                    points_high += 0}
+                else if (data.rt >= (getSubjectData.rt -100) && data.rt < (getSubjectData.rt-50)) {
+                    points_high  += 0}
+                else if (data.rt >= (getSubjectData.rt-50) && data.rt < getSubjectData.rt) {
+                    points_high += 0}
+                else if (data.rt >= getSubjectData.rt && data.rt < (getSubjectData.rt+50)) {
+                    points_high += 0}
+                else if (data.rt >= (getSubjectData.rt+50) && data.rt < (getSubjectData.rt+100)) {
+                    points_high  += 0}
+                else if (data.rt >= (getSubjectData.rt+100) && data.rt < (getSubjectData.rt+150)) {
+                    points_high += 0}
+                else if (data.rt >= (getSubjectData.rt+150) && data.rt < (getSubjectData.rt+200)) {
+                    points_high  += 0}
+                else if (data.rt >= (getSubjectData.rt+200) && data.rt < (getSubjectData.rt+250)) {
+                    points_high += 0}
+                else if (data.rt >= getSubjectData.rt+250) {
+                    points_high  += 0}
+                else { points_high += 0}
+            } */
         };
 
         ////////////////////////////////////////////////
@@ -647,94 +657,63 @@
         var trial_seq_low_2 = {
             type: 'single-stim-special',
             condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_3+delay2_3,
-                    prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp2_3+delay2_3,
-                    prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_3+delay4_3,
-                    prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_3+delay5_3,
-                    prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_3+delay2_3,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp2_3+delay2_3,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_3+delay4_3,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_3+delay5_3,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
+            ]
         };
 
         var trial_seq_high_2 = {
             type: 'single-stim-special',
             condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
-                    prompt: function () {points_low = 0;
-                        return "<p>Punkte: "+points_low+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_10+delay2_10,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
                     prompt: function () {
-                        return "<p>Punkte: "+points_low+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_10+delay3_10,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_10+delay2_10,
                     prompt: function () {
-                        return "<p>Punkte: "+points_low+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_10+delay4_10,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_10+delay3_10,
                     prompt: function () {
-                        return "<p>Punkte: "+points_low+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_10+delay5_10,
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_10+delay4_10,
                     prompt: function () {
-                        return "<p>Punkte: "+points_low+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_high += 0}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_10+delay5_10,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -744,91 +723,63 @@
         var trial_seq_low_3 = {
             type: 'single-stim-special',
             condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points:points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_4+delay3_4, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
+                    prompt: function () {points_low = 0;
+                    return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+            ]
         };
 
         var trial_seq_high_3 = {
             type: 'single-stim-special',
             condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_11+delay2_11,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_11+delay3_11,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_11+delay4_11,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_11+delay5_11,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_11+delay2_11,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_11+delay3_11,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_11+delay4_11,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_11+delay5_11,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -838,91 +789,62 @@
         var trial_seq_low_4 = {
             type: 'single-stim-special',
             condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_5+delay2_5, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_5+delay3_5, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_5+delay4_5, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_5+delay5_5, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_5+delay2_5,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_5+delay3_5,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_5+delay4_5,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_5+delay5_5,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+            ]
         };
 
         var trial_seq_high_4 = {
             type: 'single-stim-special',
             condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_12+delay5_12,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                {timing: function() {return startTimer(10)}, prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_12+delay5_12,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -932,91 +854,63 @@
         var trial_seq_low_5 = {
             type: 'single-stim-special',
             condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_6+delay2_6, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_6+delay3_6, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_6+delay4_6, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_6+delay5_6, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_6+delay2_6,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_6+delay3_6,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_6+delay4_6,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_6+delay5_6,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+            ]
         };
 
         var trial_seq_high_5 = {
             type: 'single-stim-special',
             condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_13+delay2_13,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_13+delay3_13,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_13+delay2_13,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_13+delay4_13,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_13+delay3_13,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_13+delay5_13,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_13+delay4_13,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_13+delay5_13,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1025,91 +919,64 @@
 
         var trial_seq_low_6 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_7+delay2_7, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_7+delay3_7, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_7+delay4_7, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_7+delay5_7, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_7+delay2_7,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_7+delay3_7,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_7+delay4_7,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_7+delay5_7,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+            ]
         };
 
         var trial_seq_high_6 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_14+delay2_14,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_14+delay3_14,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_14+delay2_14,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_14+delay4_14,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_14+delay3_14,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_14+delay5_14,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_14+delay4_14,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_14+delay5_14,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1118,91 +985,64 @@
 
         var trial_seq_low_7 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_8+delay2_8, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_8+delay3_8, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_8+delay4_8, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_8+delay5_8, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_8+delay2_8,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_8+delay3_8,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_8+delay4_8,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_8+delay5_8,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+            ]
         };
 
         var trial_seq_high_7 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_15+delay2_15,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_15+delay3_15,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_15+delay2_15,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_15+delay4_15,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_15+delay3_15,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_15+delay5_15,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_15+delay4_15,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_15+delay5_15,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1211,91 +1051,64 @@
 
         var trial_seq_low_8 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_9+delay2_9, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_9+delay3_9, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_9+delay4_9, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_9+delay5_9, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_9+delay2_9,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_9+delay3_9,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_9+delay4_9,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_9+delay5_9,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+            ]
         };
 
         var trial_seq_high_8 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_1+delay2_1,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_1+delay3_1,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_1+delay2_1,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_1+delay4_1,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_1+delay3_1,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_1+delay5_1,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_1+delay4_1,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_1+delay5_1,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1304,91 +1117,64 @@
 
         var trial_seq_low_9 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_10+delay2_10, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_10+delay3_10, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_10+delay4_10, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_10+delay5_10, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_10+delay2_10,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_10+delay3_10,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_10+delay4_10,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_10+delay5_10,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+            ]
         };
 
         var trial_seq_high_9 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_2+delay2_2,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_2+delay3_2,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_2+delay2_2,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_2+delay4_2,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_2+delay3_2,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_2+delay5_2,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_2+delay4_2,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_2+delay5_2,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1397,91 +1183,64 @@
 
         var trial_seq_low_10 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_11+delay2_11, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_11+delay3_11, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_11+delay4_11, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_11+delay5_11, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_11+delay2_11,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_11+delay3_11,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_11+delay4_11,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_11+delay5_11,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+            ]
         };
 
         var trial_seq_high_10 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_3+delay2_3,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_3+delay3_3,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_3+delay2_3,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_3+delay4_3,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_3+delay3_3,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_3+delay5_3,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_3+delay4_3,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_3+delay5_3,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1490,91 +1249,64 @@
 
         var trial_seq_low_11 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_12+delay3_12, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_12+delay5_12, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_12+delay5_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+            ]
         };
 
         var trial_seq_high_11 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1583,91 +1315,64 @@
 
         var trial_seq_low_12 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_12+delay3_12, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_12+delay5_12, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_12+delay5_12,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+            ]
         };
 
         var trial_seq_high_12 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1676,90 +1381,64 @@
 
         var trial_seq_low_13 = {
             type: 'single-stim-special',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_13+delay2_13, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_13+delay3_13, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_13+delay4_13, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_13+delay5_13, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_13+delay2_13,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_13+delay3_13,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_13+delay4_13,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_13+delay5_13,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+            ]
         };
 
         var trial_seq_high_13 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_5+delay2_5,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_5+delay3_5,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_5+delay2_5,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_5+delay4_5,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_5+delay3_5,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_5+delay5_5,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_5+delay4_5,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_5+delay5_5,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1768,91 +1447,64 @@
 
         var trial_seq_low_14 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_14+delay2_14, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_14+delay3_14, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_14+delay4_14, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_14+delay5_14, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_14+delay2_14,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_14+delay3_14,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_14+delay4_14,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_14+delay5_14,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+            ]
         };
 
         var trial_seq_high_14 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'high_points',
+                points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_6+delay2_6,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_6+delay3_6,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_6+delay2_6,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_6+delay4_6,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_6+delay3_6,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_6+delay5_6,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_6+delay4_6,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_6+delay5_6,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+            ]
         };
 
         ////////////////////////////////////////////////
@@ -1861,98 +1513,70 @@
 
         var trial_seq_low_15 = {
             type: 'single-stim-special',
-            pic_prompt: '<img style="position: absolute; top: 30%; height: 30%; left: 80%" src="img/correct.png">',
+            condition: -1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'
-            },
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {   timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15, prompt: function () {
-                    points_low = 0;
-                    return "<p>Punkte: "+points_low +" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_15+delay2_15, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_15+delay3_15, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_15+delay4_15, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_15+delay5_15, prompt: function () {
-                    return "<p>Punkte: " + points_low + " </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_low += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_low += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_low += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_low += 0}
-                else {
-                    points_low += 0}
-            }
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_15+delay2_15,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_15+delay3_15,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_15+delay4_15,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_15+delay5_15,
+                    prompt: function () {points_low = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+            ]
         };
 
         var trial_seq_high_15 = {
             type: 'single-stim-special',
+            condition: 1,
+            reaction_time: function() {var sub_info = getSubjectData(); return sub_info.rt},
             is_html: true,
             choices: ['downarrow'],
-            timing_stim: 500,
+            timing_stim: 75,
             response_ends_trial: false,
             data: {
-                response: 'pressed',
-                trial: 'low_points'},
+                trial: 'low_points',
+                points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {
-                    timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
-                    prompt: function () {points_high = 0;
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp2_7+delay2_7,
+                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial:0, timing_response: allow_resp3_7+delay3_7,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp2_7+delay2_7,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp4_7+delay4_7,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial:0, timing_response: allow_resp3_7+delay3_7,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}},
-                {
-                    timing_post_trial: 0, timing_response: allow_resp5_7+delay5_7,
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp4_7+delay4_7,
                     prompt: function () {
-                        return "<p>Punkte: "+points_high+" </p>"}}
-            ],
-            on_finish: function (data) {
-                if (data.rt >= 1 && data.rt <= 200) {
-                    points_high += 0}
-                else if (data.rt >= 200 && data.rt < 400) {
-                    points_high += 0}
-                else if (data.rt >= 400 && data.rt < 500) {
-                    points_high += 0}
-                else if (data.rt >= 500 && data.rt < 600) {
-                    points_high += 0}
-                else {
-                    points_high += 0}
-            }
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp5_7+delay5_7,
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+            ]
         };
-
 
         var total_points = {
             type: 'single-stim',
             is_html: true,
-            stimulus: function () {var tot = +points_high + +points_low; return "<p>Gesamtpunktanzahl: "+tot+"</p>"},
+            stimulus: function () {var tot = +points_high + +points_low; return "<p style='font-size: 40pt'>Gesamtpunktanzahl: "+tot+"</p>"},
             timing_stim: 2000,
             response_ends_trial: false,
             timing_post_trial: 0,

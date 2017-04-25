@@ -29,6 +29,10 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
     trial.is_html = (typeof trial.is_html == 'undefined') ? false : trial.is_html;
     trial.prompt = trial.prompt || "";
     trial.condition = trial.condition || "undefined";
+    trial.timing = trial.timing || "undefined";
+
+    var startit = trial.timing;
+    startit;
 
     // this array holds handlers from setTimeout calls
     // that need to be cleared if the trial ends early
@@ -80,9 +84,7 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
 
     // function to handle responses by the subject
     var after_response = function(info) {
-
-      display_element.html('');
-
+        display_element.html('');
       if (trial.condition == -1) {
         if (info.rt >= 1 && info.rt <= 200) {
             points_low += 20}
@@ -94,18 +96,18 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
             points_low += 2}
       if (press==0 && info.rt < 600) {
           display_element.append($('<div>', {
-            html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/correct.png">',
+            html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/correct.png">',
               id: 'jspsych-single-stim-pic-prompt'
         }))}
       else if (press==0 && info.rt > 600) {
           display_element.append($('<div>', {
-            html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/incorrect.png">',
+            html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
       else {
           points_low = points_low -10;
         display_element.append($('<div>', {
-          html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/incorrect.png">',
+          html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
             id: 'jspsych-single-stim-pic-prompt'
         }));
       }}
@@ -120,22 +122,21 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
             points_high += 20}
         if (press==0 && info.rt < 600) {
           display_element.append($('<div>', {
-            html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/correct.png">',
+            html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/correct.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
         else if (press==0 && info.rt > 600) {
                 display_element.append($('<div>', {
-                    html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/incorrect.png">',
+                    html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
                     id: 'jspsych-single-stim-pic-prompt'
                 }))}
         else {
           points_high = points_high -10;
           display_element.append($('<div>', {
-            html: '<img style="position: absolute; top: 30%; height: 30%; left: 70%" src="img/incorrect.png">',
+            html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" pt src="img/incorrect.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
       }
-
       press = 1;
 
       if (trial.timing_stim > 0) {

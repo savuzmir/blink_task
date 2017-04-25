@@ -14,7 +14,10 @@ body {
     display: table;
     margin-left: auto;
     margin-right: auto;
-    background-color: inherit
+    background-color: inherit;
+    font-size: 32pt;
+    font-family:"Arial";
+    line-height: 100%
 }
 .child {
     display: table-cell;
