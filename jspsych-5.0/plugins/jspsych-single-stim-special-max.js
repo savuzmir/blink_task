@@ -29,10 +29,10 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
     trial.is_html = (typeof trial.is_html == 'undefined') ? false : trial.is_html;
     trial.prompt = trial.prompt || "";
     trial.condition = trial.condition || "undefined";
-    trial.timing = trial.timing || "undefined";
+/*    trial.timing = trial.timing || "undefined";
 
     var startit = trial.timing;
-    startit;
+    startit;*/
 
     // this array holds handlers from setTimeout calls
     // that need to be cleared if the trial ends early

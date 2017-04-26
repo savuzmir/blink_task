@@ -161,7 +161,7 @@
             timeline: [
                 {stimulus: function() {return '<p style="font-size: 72pt">3</p>'}},
                 {stimulus: function() {return '<p style="font-size: 72pt">2</p>'}},
-                {stimulus: function() {return '<p style="font-size: 72pt">1</p>'}}
+                {stimulus: function() {return '<p style="font-size: 72pt">1</p>'}, on_finish: function () {startTimer(10)}}
             ]
         };
 
@@ -220,7 +220,7 @@
             timing_stim: sequences[0][0] - 75,
             timing_response: sequences[0][0],
             timing_post_trial: 0,
-            reseponse_ends_trial: false
+            response_ends_trial: false,
         };
 
         /////////////////////////////
@@ -486,7 +486,7 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                    {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1},
+                {timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1},
                 {timing_post_trial: 0, timing_response: allow_resp2_1+delay2_1},
                 {timing_post_trial:0, timing_response: allow_resp3_1+delay3_1},
                 {timing_post_trial: 0, timing_response: allow_resp4_1+delay4_1},
@@ -508,7 +508,7 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8},
+                {timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8},
                 {timing_post_trial: 0, timing_response: allow_resp2_8+delay2_8},
                 {timing_post_trial:0, timing_response: allow_resp3_8+delay3_8},
                 {timing_post_trial: 0, timing_response: allow_resp4_8+delay4_8},
@@ -572,7 +572,7 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
+                {timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_2+delay2_2,
@@ -606,7 +606,7 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
+                {timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_9+delay2_9,
@@ -667,20 +667,20 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
+                {timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_3+delay2_3,
-                    prompt: function () {points_low = 0;
+                    prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp2_3+delay2_3,
-                    prompt: function () {points_low = 0;
+                    prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_3+delay4_3,
-                    prompt: function () {points_low = 0;
+                    prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_3+delay5_3,
-                    prompt: function () {points_low = 0;
+                    prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
         };
@@ -698,8 +698,8 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
-                    prompt: function () {
+                {timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
+                    prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_10+delay2_10,
                     prompt: function () {
@@ -733,20 +733,20 @@
                 points:points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
+                {timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
-                    prompt: function () {points_low = 0;
-                    return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
-                    prompt: function () {points_low = 0;
+                    prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
-                    prompt: function () {points_low = 0;
+                    prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
-                    prompt: function () {points_low = 0;
+                    prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
@@ -764,8 +764,8 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
-                    prompt: function () {
+                {timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
+                    prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_11+delay2_11,
                     prompt: function () {
@@ -799,21 +799,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
+                {timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_5+delay2_5,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_5+delay3_5,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_5+delay4_5,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_5+delay5_5,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
 
@@ -830,20 +830,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_12+delay5_12,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
         };
 
@@ -864,21 +865,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
+                {timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_6+delay2_6,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_6+delay3_6,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_6+delay4_6,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_6+delay5_6,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
         };
 
@@ -895,21 +896,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_13+delay2_13,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_13+delay3_13,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_13+delay4_13,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_13+delay5_13,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
         };
 
@@ -930,21 +931,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
+                {timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_7+delay2_7,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_7+delay3_7,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_7+delay4_7,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_7+delay5_7,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
         };
 
@@ -961,21 +962,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_14+delay2_14,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_14+delay3_14,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_14+delay4_14,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_14+delay5_14,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
         };
 
@@ -996,21 +997,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8,
+                {timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_8+delay2_8,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_8+delay3_8,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_8+delay4_8,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_8+delay5_8,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
         };
 
@@ -1027,21 +1028,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_15+delay2_15,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_15+delay3_15,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_15+delay4_15,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_15+delay5_15,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
         };
 
@@ -1062,21 +1063,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
+                {timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_9+delay2_9,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_9+delay3_9,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_9+delay4_9,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_9+delay5_9,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
         };
 
@@ -1093,21 +1094,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_1+delay2_1,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_1+delay3_1,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_1+delay4_1,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_1+delay5_1,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
         };
 
@@ -1128,21 +1129,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
+                {timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_10+delay2_10,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_10+delay3_10,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_10+delay4_10,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_10+delay5_10,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}}
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
         };
 
@@ -1159,21 +1160,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_2+delay2_2,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_2+delay3_2,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_2+delay4_2,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_2+delay5_2,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
         };
 
@@ -1194,21 +1195,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
+                {timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_11+delay2_11,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_11+delay3_11,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_11+delay4_11,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_11+delay5_11,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
 
@@ -1225,21 +1226,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_3+delay2_3,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_3+delay3_3,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_3+delay4_3,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_3+delay5_3,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
         };
 
@@ -1260,21 +1261,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
+                {timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_12+delay5_12,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
 
@@ -1291,21 +1292,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
         };
 
@@ -1326,21 +1327,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
+                {timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_12+delay5_12,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
 
@@ -1357,21 +1358,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
         };
 
@@ -1392,21 +1393,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
+                {timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_13+delay2_13,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_13+delay3_13,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_13+delay4_13,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_13+delay5_13,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
 
@@ -1423,21 +1424,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_5+delay2_5,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_5+delay3_5,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_5+delay4_5,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_5+delay5_5,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
         };
 
@@ -1458,21 +1459,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
+                {timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_14+delay2_14,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_14+delay3_14,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_14+delay4_14,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_14+delay5_14,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
 
@@ -1489,21 +1490,21 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_6+delay2_6,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_6+delay3_6,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_6+delay4_6,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_6+delay5_6,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
         };
 
@@ -1524,21 +1525,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
+                {timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
                     prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_15+delay2_15,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_15+delay3_15,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_15+delay4_15,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_15+delay5_15,
-                    prompt: function () {points_low = 0;
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_low+" </p>"}},
+                    prompt: function () {
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
 
@@ -1555,21 +1556,21 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing: function() {return startTimer(10)}, timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
-                    prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                {timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
+                    prompt: function () {points_high = 0;
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp2_7+delay2_7,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial:0, timing_response: allow_resp3_7+delay3_7,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp4_7+delay4_7,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: allow_resp5_7+delay5_7,
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
         };
 
