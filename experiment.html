@@ -68,40 +68,38 @@
 
         var first_instructions = {
             type: "text",
-            text: "Willkommen zu dieser Studie \n\n\n" +
+            text: "Willkommen zu dieser Studie! <br><br><br>" +
                   "Vielen Dank für Ihre Teilnahme an diesem Nachexperiment",
             timing_post_trial: 0
         };
 
         var second_instructions = {
             type: "text",
-            text: "Bitte lesen Sie kurz die Zusammenfassung der Studie" +
-                  "Bevor das eigentliche Spiel beginnt werden Sie 1 Übungsrunde absolvieren" +
-                  "Sie können diese Runden nutzen um das Spiel auszuprobieren. Versuchen \n\n" +
-                  "Sie das weiße Quadrat zu treffen in dem Sie nach dessen Erscheinen \n\n" +
-                  "die Pfeiltaste UNTEN so schnell wie möglich betätigen. \n\n" +
-                  "Je schneller Sie es schaffen die Pfeiltaste UNTEN zu betätigen, \n\n" +
-                  "desto mehr Punkte erhalten Sie.\n\n" +
+            text: "Bitte lesen Sie kurz die Zusammenfassung der Studie. <br><br>" +
+                  "Versuchen Sie das weiße Quadrat zu treffen in dem Sie nach dessen Erscheinen " +
+                  "die Pfeiltaste UNTEN so schnell wie möglich betätigen. " +
+                  "Je schneller Sie es schaffen die Pfeiltaste UNTEN zu betätigen, " +
+                  "desto mehr Punkte erhalten Sie.<br><br><br>" +
                   "(Drücken Sie ENTER um fortzufahren)"
         };
 
         var instructions_max_round_begin = {
             type: "text",
-            text: "In den nächsten 2 Runden wollen wir testen \n\n wie schnell Sie es schaffen die 5 weißen Quadrate \n\n innerhalb von 10 Sekunden zu treffen.\n\n" +
-                  "Diese Runden sind sehr wichtig für den BONUS !\n\n\n Sie sehen nun einen Countdown, der von 3 bis 1 herunterzählt. \n\n\n\n" +
+            text: "In den nächsten 2 Runden wollen wir testen wie schnell Sie es schaffen die 5 weißen Quadrate innerhalb von 10 Sekunden zu treffen. <br><br>" +
+                  "Diese Runden sind sehr wichtig für den BONUS ! Sie sehen nun einen Countdown, der von 3 bis 1 herunterzählt. <br><br><br>" +
                   "(Drücken Sie ENTER um fortzufahren)",
             timing_post_trial: 0
         };
 
         var instructions_main = {
             type: "text",
-            text: "Bitte sorgfältig lesen! \n\n\n" +
-            "In diesem Teil nehmen Sie an einem Leistungsexperiment teil mit, \n\n" +
-            "wobei Ihre Leistung mit demselben Geschicklichkeitsspiel gemessen wird. \n\n" +
-            "Dieser Teil besteht aus 30 Runden und funktioniert genauso wie die Übungsrunden. \n\n" +
-            "Jede Runde beginnt mit einer Ankündigung darüber wie viele Punkte \n\n" +
-            "Sie pro Quadrat erhalten können. Alle 2 Runden werden \n\n" +
-            "Ihre erreichten Punkte zu einer Gesamtpunkteanzahl addiert. \n\n\n\n" +
+            text: "Bitte sorgfältig lesen! <br><br>" +
+            "In diesem Teil nehmen Sie an einem Leistungsexperiment teil mit, " +
+            "wobei Ihre Leistung mit demselben Geschicklichkeitsspiel gemessen wird. " +
+            "Dieser Teil besteht aus 30 Runden und funktioniert genauso wie die ersten Runden. " +
+            "Jede Runde beginnt mit einer Ankündigung darüber wie viele Punkte " +
+            "Sie pro Quadrat erhalten können. Alle 2 Runden werden " +
+            "Ihre erreichten Punkte zu einer Gesamtpunkteanzahl addiert. <br><br><br>" +
             "(Drücken Sie ENTER um zur nächsten Seite fortzufahren)",
             timing_post_trial: 0
         };
@@ -109,9 +107,9 @@
 
         var instructions_hand = {
             type: "text",
-            text: "Bitte verwenden Sie während der gesamten Studie immer \n\n" +
-            "dieselbe Hand um die Pfeiltaste UNTEN zu drücken und wechseln Sie diese nicht! \n\n\n\n" +
-            "(Drücken Sie ENTER um fortzufahren)",
+            text: "Bitte verwenden Sie während der gesamten Studie immer " +
+            "dieselbe Hand um die Pfeiltaste UNTEN zu drücken und wechseln Sie diese nicht! <br><br><br>" +
+            "(Drücken Sie ENTER um fortzufahren) <br><br><br>",
             timing_post_trial: 0
         };
 
@@ -1660,10 +1658,7 @@
                 fullscreen: true,
                 display_element: $('#jspsych_target'),
                 default_iti: 0,
-                on_finish: function() {
-            jsPsych.data.displayData('csv');
-        }
-/*                on_finish: function () {
+                on_finish: function () {
                     $.ajax({
                         type: "POST",
                         url: "/experiment-data",
@@ -1676,9 +1671,8 @@
                         .fail(function () {
                             alert("a problem occurred while writing to the database. plaese contact the research for more information.");
                             window.location.href = "/";
-                        }) */
-                })
-            /* }); */
+                        })
+             });
 
     </script>
 </html>

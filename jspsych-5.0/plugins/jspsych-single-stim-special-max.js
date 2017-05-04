@@ -38,6 +38,7 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
     // that need to be cleared if the trial ends early
     var setTimeoutHandlers = [];
     var press = 0;
+    var pressed = 0;
 
       // display stimulus
       display_element.append($('<div>', {
@@ -72,7 +73,8 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
       var trial_data = {
         "rt": response.rt,
           "points_low": response.points_low,
-          "points_high": response.points_high
+          "points_high": response.points_high,
+          "keys_pressed": pressed
       };
 
       // clear the display
@@ -137,6 +139,7 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
               id: 'jspsych-single-stim-pic-prompt'
           }))}
       }
+      pressed++;
       press = 1;
 
       if (trial.timing_stim > 0) {
