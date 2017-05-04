@@ -17,7 +17,7 @@
         <div class = "parent">
             <div class = "child">
                 <div id="jspsych_target"></div>
-                <span id="countdown" style="font-weight: bold; font-size: xx-large; position:absolute; left: 2.5pc; top: 2.5pc">11</span>
+                <span id="countdown" style="font-weight: bold; font-size: xx-large; position:absolute; left: 2.5pc; top: 2.5pc">10</span>
             </div>
         </div>
     </body>
@@ -122,7 +122,9 @@
 
         var instructions_end = {
             type: "text",
-            text: "Dies ist das Ende der Aufgabe \n\n\n Vielen Dank"
+            timing_stim: 1000,
+            timing_post_trial: 0,
+            text: "Dies ist das Ende der Aufgabe <br><br><br> Vielen Dank"
         };
 
 
@@ -172,7 +174,7 @@
 
         var round_info_high = {
             type: 'single-stim',
-            timing_stim: 7500,
+            timing_stim: 2500,
             timing_response: 2500,
             timing_post_trial: 0,
             response_ends_trial: false,
@@ -183,7 +185,7 @@
 
         var round_info_low = {
             type: 'single-stim',
-            timing_stim: 7500,
+            timing_stim: 2500,
             timing_response: 2500,
             timing_post_trial: 0,
             response_ends_trial: false,
@@ -1672,7 +1674,7 @@
                             alert("a problem occurred while writing to the database. plaese contact the research for more information.");
                             window.location.href = "/";
                         })
-             });
+             }});
 
     </script>
 </html>
