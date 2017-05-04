@@ -667,8 +667,10 @@
                 {timing_post_trial: 0, timing_response: delay5_3, data: {delay: delay5_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_2 = {
             type: 'single-stim-special',
@@ -698,8 +700,10 @@
                 {timing_post_trial: 0, timing_response: delay5_10, data: {delay: delay5_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND THREE */
@@ -733,8 +737,10 @@
                 {timing_post_trial: 0, timing_response: delay5_4, data: {delay: delay5_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_3 = {
             type: 'single-stim-special',
@@ -764,8 +770,10 @@
                 {timing_post_trial: 0, timing_response: delay5_11, data: {delay: delay5_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND FOUR */
@@ -799,8 +807,10 @@
                 {timing_post_trial: 0, timing_response: delay5_5, data: {delay: delay5_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
 
         var trial_seq_high_4 = {
@@ -831,8 +841,10 @@
                 {timing_post_trial: 0, timing_response: delay5_12, data: {delay: delay5_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND FIVE */
@@ -866,8 +878,10 @@
                 {timing_post_trial: 0, timing_response: delay5_6, data: {delay: delay5_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_5 = {
             type: 'single-stim-special',
@@ -897,8 +911,10 @@
                 {timing_post_trial: 0, timing_response: delay5_13, data: {delay: delay5_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND SIX */
@@ -932,8 +948,10 @@
                 {timing_post_trial: 0, timing_response: delay5_7, data: {delay: delay5_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_6 = {
             type: 'single-stim-special',
@@ -963,8 +981,10 @@
                 {timing_post_trial: 0, timing_response: delay5_14, data: {delay: delay5_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND SEVEN */
@@ -998,8 +1018,10 @@
                 {timing_post_trial: 0, timing_response: delay5_8, data: {delay: delay5_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_7 = {
             type: 'single-stim-special',
@@ -1029,8 +1051,10 @@
                 {timing_post_trial: 0, timing_response: delay5_15, data: {delay: delay5_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND EIGHT */
@@ -1064,8 +1088,10 @@
                 {timing_post_trial: 0, timing_response: delay5_9, data: {delay: delay5_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_8 = {
             type: 'single-stim-special',
@@ -1095,8 +1121,10 @@
                 {timing_post_trial: 0, timing_response: delay5_1, data: {delay: delay5_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND NINE */
@@ -1130,8 +1158,10 @@
                 {timing_post_trial: 0, timing_response: delay5_10, data: {delay: delay5_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_9 = {
             type: 'single-stim-special',
@@ -1161,8 +1191,10 @@
                 {timing_post_trial: 0, timing_response: delay5_2, data: {delay: delay5_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND TEN */
@@ -1196,8 +1228,10 @@
                 {timing_post_trial: 0, timing_response: delay5_11, data: {delay: delay5_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_10 = {
             type: 'single-stim-special',
@@ -1227,8 +1261,10 @@
                 {timing_post_trial: 0, timing_response: delay5_3, data: {delay: delay5_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND ELEVEN */
@@ -1262,8 +1298,10 @@
                 {timing_post_trial: 0, timing_response: delay5_12, data: {delay: delay5_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_11 = {
             type: 'single-stim-special',
@@ -1293,8 +1331,10 @@
                 {timing_post_trial: 0, timing_response: delay5_4, data: {delay: delay5_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND TWELVE */
@@ -1328,8 +1368,10 @@
                 {timing_post_trial: 0, timing_response: delay5_13, data: {delay: delay5_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_12 = {
             type: 'single-stim-special',
@@ -1359,8 +1401,10 @@
                 {timing_post_trial: 0, timing_response: delay5_5,  data: {delay: delay5_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND THIRTEEN */
@@ -1394,8 +1438,10 @@
                 {timing_post_trial: 0, timing_response: delay5_14,  data: {delay: delay5_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_13 = {
             type: 'single-stim-special',
@@ -1425,8 +1471,10 @@
                 {timing_post_trial: 0, timing_response: delay5_6,  data: {delay: delay5_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND FOURTEEN */
@@ -1460,8 +1508,10 @@
                 {timing_post_trial: 0, timing_response: delay5_15,  data: {delay: delay5_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_14 = {
             type: 'single-stim-special',
@@ -1491,8 +1541,10 @@
                 {timing_post_trial: 0, timing_response: delay5_7,  data: {delay: delay5_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         ////////////////////////////////////////////////
         /* ROUND FIFTEEN */
@@ -1526,8 +1578,10 @@
                 {timing_post_trial: 0, timing_response: delay5_1,  data: {delay: delay5_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+        }};
 
         var trial_seq_high_15 = {
             type: 'single-stim-special',
@@ -1557,8 +1611,10 @@
                 {timing_post_trial: 0, timing_response: delay5_8,  data: {delay: delay5_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-            ]
-        };
+            ],
+            on_finish: function() {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+        }};
 
         var total_points = {
             type: 'single-stim',
