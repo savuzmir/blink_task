@@ -105,7 +105,7 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
               id: 'jspsych-single-stim-pic-prompt'
           }))}
       else {
-          points_low = points_low -10;
+          points_low = points_low -3;
         display_element.append($('<div>', {
           html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
             id: 'jspsych-single-stim-pic-prompt'
@@ -131,7 +131,7 @@ jsPsych.plugins["single-stim-special-max"] = (function() {
                     id: 'jspsych-single-stim-pic-prompt'
                 }))}
         else {
-          points_high = points_high -10;
+          points_high = points_high -30;
           display_element.append($('<div>', {
             html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" pt src="img/incorrect.png">',
               id: 'jspsych-single-stim-pic-prompt'

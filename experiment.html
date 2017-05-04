@@ -17,13 +17,13 @@
         <div class = "parent">
             <div class = "child">
                 <div id="jspsych_target"></div>
-                <span id="countdown" style="font-weight: bold; font-size: xx-large; position:absolute; left: 2.5pc; top: 2.5pc">10</span>
+                <span id="countdown" style="font-weight: bold; font-size: xx-large; position:absolute; left: 2.5pc; top: 2.5pc">11</span>
             </div>
         </div>
     </body>
     <script>
 
-
+        document.getElementById("countdown").style.visibility ='hidden';
         var timeInSecs;
         var ticker;
 
@@ -33,12 +33,14 @@
         }
 
         function tick() {
+            document.getElementById("countdown").style.visibility ='visible';
             var secs = timeInSecs;
             if (secs>0) {
                 timeInSecs--;
             }
             else {
                 clearInterval(ticker); // stop counting at zero
+                document.getElementById("countdown").style.visibility ='hidden';
             }
             document.getElementById("countdown").innerHTML = secs;
         }
@@ -165,30 +167,8 @@
             ]
         };
 
-            /* We need a big countdown timer */
-
-        var main_countdown = {
-            type: 'single-stim',
-            response_ends_trial: false,
-            timing_post_trial: 0,
-            timing_stim: 750,
-            timing_response: 1000,
-            timeline: [
-                {stimulus: 'img/ten.png'},
-                {stimulus: 'img/nine.png'},
-                {stimulus: 'img/eight.png'},
-                {stimulus: 'img/seven.png'},
-                {stimulus: 'img/six.png'},
-                {stimulus: 'img/five.png'},
-                {stimulus: 'img/four.png'},
-                {stimulus: 'img/three.png'},
-                {stimulus: 'img/two.png'},
-                {stimulus: 'img/one.png'}
-            ]
-        };
-
-            /* this is basically the main block */
-            /* this small variable is here to server as a delay buffer before the first
+        /* this is basically the main block */
+        /* this small variable is here to server as a delay buffer before the first
         trial gets presented because I can't do it any other way for now */
 
 
@@ -215,259 +195,276 @@
         };
 
 
-        var first_trial_buffer = {
+        var buffer1 = {
             type: 'single-stim',
-            timing_stim: sequences[0][0] - 75,
+            timing_stim: sequences[0][0],
             timing_response: sequences[0][0],
             timing_post_trial: 0,
-            response_ends_trial: false,
+            response_ends_trial: false
+        };
+
+        var buffer2 = {
+            type: 'single-stim',
+            timing_stim: sequences[1][0],
+            timing_response: sequences[1][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer3 = {
+            type: 'single-stim',
+            timing_stim: sequences[2][0],
+            timing_response: sequences[2][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer4 = {
+            type: 'single-stim',
+            timing_stim: sequences[3][0],
+            timing_response: sequences[3][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer5 = {
+            type: 'single-stim',
+            timing_stim: sequences[4][0],
+            timing_response: sequences[4][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer6 = {
+            type: 'single-stim',
+            timing_stim: sequences[5][0],
+            timing_response: sequences[5][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer7 = {
+            type: 'single-stim',
+            timing_stim: sequences[6][0],
+            timing_response: sequences[6][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer8 = {
+            type: 'single-stim',
+            timing_stim: sequences[7][0],
+            timing_response: sequences[7][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer9 = {
+            type: 'single-stim',
+            timing_stim: sequences[8][0],
+            timing_response: sequences[8][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer10 = {
+            type: 'single-stim',
+            timing_stim: sequences[9][0],
+            timing_response: sequences[9][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer11 = {
+            type: 'single-stim',
+            timing_stim: sequences[10][0],
+            timing_response: sequences[10][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer12 = {
+            type: 'single-stim',
+            timing_stim: sequences[11][0],
+            timing_response: sequences[11][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer13 = {
+            type: 'single-stim',
+            timing_stim: sequences[12][0],
+            timing_response: sequences[12][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer14 = {
+            type: 'single-stim',
+            timing_stim: sequences[13][0],
+            timing_response: sequences[13][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
+        var buffer15 = {
+            type: 'single-stim',
+            timing_stim: sequences[14][0],
+            timing_response: sequences[14][0],
+            timing_post_trial: 0,
+            response_ends_trial: false
         };
 
         /////////////////////////////
         /* block 1 */
         ////////////////////////////
 
-        var delay1_1 = sequences[0][1] - sequences[0][0] - 200;
-        var delay2_1 = sequences[0][2] - sequences[0][1] - 200;
-        var delay3_1 = sequences[0][3] - sequences[0][2] - 200;
-        var delay4_1 = sequences[0][4] - sequences[0][3] - 200;
-        var delay5_1 = 9800 - sequences[0][4];
-
-        var allow_resp1_1 = sequences[0][1] - sequences[0][0];
-        var allow_resp2_1 = sequences[0][2] - sequences[0][1];
-        var allow_resp3_1 = sequences[0][3] - sequences[0][2];
-        var allow_resp4_1 = sequences[0][4] - sequences[0][3];
-        var allow_resp5_1 = 10000 - sequences[0][4];
-
-
+        var delay1_1 = sequences[0][1] - sequences[0][0];
+        var delay2_1 = sequences[0][2] - sequences[0][1];
+        var delay3_1 = sequences[0][3] - sequences[0][2];
+        var delay4_1 = sequences[0][4] - sequences[0][3];
+        var delay5_1 = 10000 - sequences[0][4];
         /////////////////////////////
         /* block 2 */
         ////////////////////////////
 
-        var delay1_2 = sequences[1][1] - sequences[1][0] - 200;
-        var delay2_2 = sequences[1][2] - sequences[1][1] - 200;
-        var delay3_2 = sequences[1][3] - sequences[1][2] - 200;
-        var delay4_2 = sequences[1][4] - sequences[1][3] - 200;
-        var delay5_2 = 9800 - sequences[1][4];
-
-        var allow_resp1_2 = sequences[1][1] - sequences[1][0];
-        var allow_resp2_2 = sequences[1][2] - sequences[1][1];
-        var allow_resp3_2 = sequences[1][3] - sequences[1][2];
-        var allow_resp4_2 = sequences[1][4] - sequences[1][3];
-        var allow_resp5_2 = 10000 - sequences[1][4];
+        var delay1_2 = sequences[1][1] - sequences[1][0];
+        var delay2_2 = sequences[1][2] - sequences[1][1];
+        var delay3_2 = sequences[1][3] - sequences[1][2];
+        var delay4_2 = sequences[1][4] - sequences[1][3];
+        var delay5_2 = 10000 - sequences[1][4];
 
         /////////////////////////////
         /* block 3 */
         ////////////////////////////
 
-        var delay1_3 = sequences[2][1] - sequences[2][0] - 200;
-        var delay2_3 = sequences[2][2] - sequences[2][1] - 200;
-        var delay3_3 = sequences[2][3] - sequences[2][2] - 200;
-        var delay4_3 = sequences[2][4] - sequences[2][3] - 200;
-        var delay5_3 = 9800 - sequences[2][4];
-
-        var allow_resp1_3 = sequences[2][1] - sequences[2][0];
-        var allow_resp2_3 = sequences[2][2] - sequences[2][1];
-        var allow_resp3_3 = sequences[2][3] - sequences[2][2];
-        var allow_resp4_3 = sequences[2][4] - sequences[2][3];
-        var allow_resp5_3 = 10000 - sequences[2][4];
+        var delay1_3 = sequences[2][1] - sequences[2][0];
+        var delay2_3 = sequences[2][2] - sequences[2][1];
+        var delay3_3 = sequences[2][3] - sequences[2][2];
+        var delay4_3 = sequences[2][4] - sequences[2][3];
+        var delay5_3 = 10000 - sequences[2][4];
 
         /////////////////////////////
         /* block 4 */
         ////////////////////////////
 
-        var delay1_4 = sequences[3][1] - sequences[3][0] - 200;
-        var delay2_4 = sequences[3][2] - sequences[3][1] - 200;
-        var delay3_4 = sequences[3][3] - sequences[3][2] - 200;
-        var delay4_4 = sequences[3][4] - sequences[3][3] - 200;
-        var delay5_4 = 9800 - sequences[3][4];
-
-        var allow_resp1_4 = sequences[3][1] - sequences[3][0];
-        var allow_resp2_4 = sequences[3][2] - sequences[3][1];
-        var allow_resp3_4 = sequences[3][3] - sequences[3][2];
-        var allow_resp4_4 = sequences[3][4] - sequences[3][3];
-        var allow_resp5_4 = 10000 - sequences[3][4];
+        var delay1_4 = sequences[3][1] - sequences[3][0];
+        var delay2_4 = sequences[3][2] - sequences[3][1];
+        var delay3_4 = sequences[3][3] - sequences[3][2];
+        var delay4_4 = sequences[3][4] - sequences[3][3];
+        var delay5_4 = 10000 - sequences[3][4];
 
         /////////////////////////////
         /* block 5 */
         ////////////////////////////
-
-        var delay1_5 = sequences[4][1] - sequences[4][0] - 200;
-        var delay2_5 = sequences[4][2] - sequences[4][1] - 200;
-        var delay3_5 = sequences[4][3] - sequences[4][2] - 200;
-        var delay4_5 = sequences[4][4] - sequences[4][3] - 200;
-        var delay5_5 = 9800 - sequences[4][4];
-
-        var allow_resp1_5 = sequences[4][1] - sequences[4][0];
-        var allow_resp2_5 = sequences[4][2] - sequences[4][1];
-        var allow_resp3_5 = sequences[4][3] - sequences[4][2];
-        var allow_resp4_5 = sequences[4][4] - sequences[4][3];
-        var allow_resp5_5 = 10000 - sequences[5][4];
+        var delay1_5 = sequences[4][1] - sequences[4][0];
+        var delay2_5 = sequences[4][2] - sequences[4][1];
+        var delay3_5 = sequences[4][3] - sequences[4][2];
+        var delay4_5 = sequences[4][4] - sequences[4][3];
+        var delay5_5 = 10000 - sequences[4][4];
 
         /////////////////////////////
         /* block 6 */
         ////////////////////////////
 
-        var delay1_6 = sequences[5][1] - sequences[5][0] - 200;
-        var delay2_6 = sequences[5][2] - sequences[5][1] - 200;
-        var delay3_6 = sequences[5][3] - sequences[5][2] - 200;
-        var delay4_6 = sequences[5][4] - sequences[5][3] - 200;
-        var delay5_6 = 9800 - sequences[5][4];
-
-        var allow_resp1_6 = sequences[5][1] - sequences[5][0];
-        var allow_resp2_6 = sequences[5][2] - sequences[5][1];
-        var allow_resp3_6 = sequences[5][3] - sequences[5][2];
-        var allow_resp4_6 = sequences[5][4] - sequences[5][3];
-        var allow_resp5_6 = 10000 - sequences[5][4];
+        var delay1_6 = sequences[5][1] - sequences[5][0];
+        var delay2_6 = sequences[5][2] - sequences[5][1];
+        var delay3_6 = sequences[5][3] - sequences[5][2];
+        var delay4_6 = sequences[5][4] - sequences[5][3];
+        var delay5_6 = 10000 - sequences[5][4];
 
         /////////////////////////////
         /* block 7 */
         ////////////////////////////
 
-        var delay1_7 = sequences[6][1] - sequences[6][0] - 200;
-        var delay2_7 = sequences[6][2] - sequences[6][1] - 200;
-        var delay3_7 = sequences[6][3] - sequences[6][2] - 200;
-        var delay4_7 = sequences[6][4] - sequences[6][3] - 200;
-        var delay5_7 = 9800 - sequences[6][4];
-
-        var allow_resp1_7 = sequences[6][1] - sequences[6][0];
-        var allow_resp2_7 = sequences[6][2] - sequences[6][1];
-        var allow_resp3_7 = sequences[6][3] - sequences[6][2];
-        var allow_resp4_7 = sequences[6][4] - sequences[6][3];
-        var allow_resp5_7 = 10000 - sequences[6][4];
+        var delay1_7 = sequences[6][1] - sequences[6][0];
+        var delay2_7 = sequences[6][2] - sequences[6][1];
+        var delay3_7 = sequences[6][3] - sequences[6][2];
+        var delay4_7 = sequences[6][4] - sequences[6][3];
+        var delay5_7 = 10000 - sequences[6][4];
 
         /////////////////////////////
         /* block 8 */
         ////////////////////////////
 
-        var delay1_8 = sequences[7][1] - sequences[7][0] - 200;
-        var delay2_8 = sequences[7][2] - sequences[7][1] - 200;
-        var delay3_8 = sequences[7][3] - sequences[7][2] - 200;
-        var delay4_8 = sequences[7][4] - sequences[7][3] - 200;
-        var delay5_8 = 9800 - sequences[7][4];
-
-        var allow_resp1_8 = sequences[7][1] - sequences[7][0];
-        var allow_resp2_8 = sequences[7][2] - sequences[7][1];
-        var allow_resp3_8 = sequences[7][3] - sequences[7][2];
-        var allow_resp4_8 = sequences[7][4] - sequences[7][3];
-        var allow_resp5_8 = 10000 - sequences[7][4];
+        var delay1_8 = sequences[7][1] - sequences[7][0];
+        var delay2_8 = sequences[7][2] - sequences[7][1];
+        var delay3_8 = sequences[7][3] - sequences[7][2];
+        var delay4_8 = sequences[7][4] - sequences[7][3];
+        var delay5_8 = 10000 - sequences[7][4];
 
         /////////////////////////////
         /* block 9 */
         ////////////////////////////
 
-        var delay1_9 = sequences[8][1] - sequences[8][0] - 200;
-        var delay2_9 = sequences[8][2] - sequences[8][1] - 200;
-        var delay3_9 = sequences[8][3] - sequences[8][2] - 200;
-        var delay4_9 = sequences[8][4] - sequences[8][3] - 200;
-        var delay5_9 = 9800 - sequences[8][4];
-
-        var allow_resp1_9 = sequences[8][1] - sequences[8][0];
-        var allow_resp2_9 = sequences[8][2] - sequences[8][1];
-        var allow_resp3_9 = sequences[8][3] - sequences[8][2];
-        var allow_resp4_9 = sequences[8][4] - sequences[8][3];
-        var allow_resp5_9 = 10000 - sequences[8][4];
+        var delay1_9 = sequences[8][1] - sequences[8][0];
+        var delay2_9 = sequences[8][2] - sequences[8][1];
+        var delay3_9 = sequences[8][3] - sequences[8][2];
+        var delay4_9 = sequences[8][4] - sequences[8][3];
+        var delay5_9 = 10000 - sequences[8][4];
 
         /////////////////////////////
         /* block 10 */
         ////////////////////////////
 
-        var delay1_10 = sequences[9][1] - sequences[9][0] - 200;
-        var delay2_10 = sequences[9][2] - sequences[9][1] - 200;
-        var delay3_10 = sequences[9][3] - sequences[9][2] - 200;
-        var delay4_10 = sequences[9][4] - sequences[9][3] - 200;
-        var delay5_10 = 9800 - sequences[9][4];
-
-        var allow_resp1_10 = sequences[9][1] - sequences[9][0];
-        var allow_resp2_10 = sequences[9][2] - sequences[9][1];
-        var allow_resp3_10 = sequences[9][3] - sequences[9][2];
-        var allow_resp4_10 = sequences[9][4] - sequences[9][3];
-        var allow_resp5_10 = 10000 - sequences[9][4];
+        var delay1_10 = sequences[9][1] - sequences[9][0];
+        var delay2_10 = sequences[9][2] - sequences[9][1];
+        var delay3_10 = sequences[9][3] - sequences[9][2];
+        var delay4_10 = sequences[9][4] - sequences[9][3];
+        var delay5_10 = 10000 - sequences[9][4];
 
         /////////////////////////////
         /* block 11 */
         ////////////////////////////
 
-        var delay1_11 = sequences[10][1] - sequences[10][0] - 200;
-        var delay2_11 = sequences[10][2] - sequences[10][1] - 200;
-        var delay3_11 = sequences[10][3] - sequences[10][2] - 200;
-        var delay4_11 = sequences[10][4] - sequences[10][3] - 200;
-        var delay5_11 = 9800 - sequences[10][4];
-
-        var allow_resp1_11 = sequences[10][1] - sequences[10][0];
-        var allow_resp2_11 = sequences[10][2] - sequences[10][1];
-        var allow_resp3_11 = sequences[10][3] - sequences[10][2];
-        var allow_resp4_11 = sequences[10][4] - sequences[10][3];
-        var allow_resp5_11 = 10000 - sequences[10][4];
+        var delay1_11 = sequences[10][1] - sequences[10][0];
+        var delay2_11 = sequences[10][2] - sequences[10][1];
+        var delay3_11 = sequences[10][3] - sequences[10][2];
+        var delay4_11 = sequences[10][4] - sequences[10][3];
+        var delay5_11 = 10000 - sequences[10][4];
 
         /////////////////////////////
         /* block 12 */
         ////////////////////////////
 
-        var delay1_12 = sequences[11][1] - sequences[11][0] - 200;
-        var delay2_12 = sequences[11][2] - sequences[11][1] - 200;
-        var delay3_12 = sequences[11][3] - sequences[11][2] - 200;
-        var delay4_12 = sequences[11][4] - sequences[11][3] - 200;
-        var delay5_12 = 9800 - sequences[11][4];
-
-        var allow_resp1_12 = sequences[11][1] - sequences[11][0];
-        var allow_resp2_12 = sequences[11][2] - sequences[11][1];
-        var allow_resp3_12 = sequences[11][3] - sequences[11][2];
-        var allow_resp4_12 = sequences[11][4] - sequences[11][3];
-        var allow_resp5_12 = 10000 - sequences[11][4];
-
+        var delay1_12 = sequences[11][1] - sequences[11][0];
+        var delay2_12 = sequences[11][2] - sequences[11][1];
+        var delay3_12 = sequences[11][3] - sequences[11][2];
+        var delay4_12 = sequences[11][4] - sequences[11][3];
+        var delay5_12 = 10000 - sequences[11][4];
 
         /////////////////////////////
         /* block 13 */
         ////////////////////////////
 
-        var delay1_13 = sequences[12][1] - sequences[12][0] - 200;
-        var delay2_13 = sequences[12][2] - sequences[12][1] - 200;
-        var delay3_13 = sequences[12][3] - sequences[12][2] - 200;
-        var delay4_13 = sequences[12][4] - sequences[12][3] - 200;
-        var delay5_13 = 9800 - sequences[12][4];
-
-        var allow_resp1_13 = sequences[12][1] - sequences[12][0];
-        var allow_resp2_13 = sequences[12][2] - sequences[12][1];
-        var allow_resp3_13 = sequences[12][3] - sequences[12][2];
-        var allow_resp4_13 = sequences[12][4] - sequences[12][3];
-        var allow_resp5_13 = 10000 - sequences[12][4];
+        var delay1_13 = sequences[12][1] - sequences[12][0];
+        var delay2_13 = sequences[12][2] - sequences[12][1];
+        var delay3_13 = sequences[12][3] - sequences[12][2];
+        var delay4_13 = sequences[12][4] - sequences[12][3];
+        var delay5_13 = 10000 - sequences[12][4];
 
         /////////////////////////////
         /* block 14 */
         ////////////////////////////
 
-        var delay1_14 = sequences[13][1] - sequences[13][0] - 200;
-        var delay2_14 = sequences[13][2] - sequences[13][1] - 200;
-        var delay3_14 = sequences[13][3] - sequences[13][2] - 200;
-        var delay4_14 = sequences[13][4] - sequences[13][3] - 200;
-        var delay5_14 = 9800 - sequences[13][4];
-
-        var allow_resp1_14 = sequences[13][1] - sequences[13][0];
-        var allow_resp2_14 = sequences[13][2] - sequences[13][1];
-        var allow_resp3_14 = sequences[13][3] - sequences[13][2];
-        var allow_resp4_14 = sequences[13][4] - sequences[13][3];
-        var allow_resp5_14 = 10000 - sequences[13][4];
+        var delay1_14 = sequences[13][1] - sequences[13][0];
+        var delay2_14 = sequences[13][2] - sequences[13][1];
+        var delay3_14 = sequences[13][3] - sequences[13][2];
+        var delay4_14 = sequences[13][4] - sequences[13][3];
+        var delay5_14 = 10000 - sequences[13][4];
 
         /////////////////////////////
         /* block 15 */
         ////////////////////////////
 
-        var delay1_15 = sequences[14][1] - sequences[14][0] - 200;
-        var delay2_15 = sequences[14][2] - sequences[14][1] - 200;
-        var delay3_15 = sequences[14][3] - sequences[14][2] - 200;
-        var delay4_15 = sequences[14][4] - sequences[14][3] - 200;
-        var delay5_15 = 9800 - sequences[0][4];
-
-        var allow_resp1_15 = sequences[14][1] - sequences[14][0];
-        var allow_resp2_15 = sequences[14][2] - sequences[14][1];
-        var allow_resp3_15 = sequences[14][3] - sequences[14][2];
-        var allow_resp4_15 = sequences[14][4] - sequences[14][3];
-        var allow_resp5_15 = 10000 - sequences[14][4];
+        var delay1_15 = sequences[14][1] - sequences[14][0];
+        var delay2_15 = sequences[14][2] - sequences[14][1];
+        var delay3_15 = sequences[14][3] - sequences[14][2];
+        var delay4_15 = sequences[14][4] - sequences[14][3];
+        var delay5_15 = 10000 - sequences[0][4];
 
         var points_low = 0;
         var points_high = 0;
-
 
 
         //////////////////////////////
@@ -486,11 +483,11 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1},
-                {timing_post_trial: 0, timing_response: allow_resp2_1+delay2_1},
-                {timing_post_trial:0, timing_response: allow_resp3_1+delay3_1},
-                {timing_post_trial: 0, timing_response: allow_resp4_1+delay4_1},
-                {timing_post_trial: 0, timing_response: allow_resp5_1+delay5_1}],
+                {timing_post_trial: 0, timing_response: delay1_1, data: {delay: delay1_1}},
+                {timing_post_trial: 0, timing_response: delay2_1, data: {delay: delay2_1}},
+                {timing_post_trial: 0, timing_response: delay3_1, data: {delay: delay3_1}},
+                {timing_post_trial: 0, timing_response: delay4_1, data: {delay: delay4_1}},
+                {timing_post_trial: 0, timing_response: delay5_1, data: {delay: delay5_1}}],
             on_finish: function () {
                 jsPsych.data.addDataToLastTrial({points: points_low});
             }
@@ -508,11 +505,11 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8},
-                {timing_post_trial: 0, timing_response: allow_resp2_8+delay2_8},
-                {timing_post_trial:0, timing_response: allow_resp3_8+delay3_8},
-                {timing_post_trial: 0, timing_response: allow_resp4_8+delay4_8},
-                {timing_post_trial: 0, timing_response: allow_resp5_8+delay5_8}],
+                {timing_post_trial: 0, timing_response: delay1_8, data: {delay: delay1_8}},
+                {timing_post_trial: 0, timing_response: delay2_8, data: {delay: delay2_8}},
+                {timing_post_trial: 0, timing_response: delay3_8, data: {delay: delay3_8}},
+                {timing_post_trial: 0, timing_response: delay4_8, data: {delay: delay4_8}},
+                {timing_post_trial: 0, timing_response: delay5_8, data: {delay: delay5_8}}],
             on_finish: function () {
                 jsPsych.data.addDataToLastTrial({points: points_high});
             }
@@ -521,6 +518,7 @@
         /////////////////////////////////////////////////
         /* END MAX ROUND */
         ////////////////////////////////////////////////
+
         ////////////////////////////////////////////////
         /* Calculating RTs */
         ////////////////////////////////////////////////
@@ -545,19 +543,6 @@
         ////////////////////////////////////////////////
         /* ROUND ONE */
         ////////////////////////////////////////////////
-        var debrief_block = {
-            type: "text",
-            text: function() {
-                var subject_data = getSubjectData();
-                return "<p>Your average response time was <strong>" +
-                    subject_data.rt + "ms</strong>. Press any key to complete the "+
-                    "experiment. Thank you!</p>";
-            },
-            on_finish: function() {
-                var subject_data = getSubjectData();
-                jsPsych.data.addProperties({mean_rt: subject_data.rt});
-        }};
-
 
         var trial_seq_low_1 = {
             type: 'single-stim-special',
@@ -572,19 +557,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
+                {timing_post_trial: 0, timing_response: delay1_2,  data: {delay: delay1_2},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_2+delay2_2,
+                {timing_post_trial: 0, timing_response: delay2_2,  data: {delay: delay2_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_2+delay3_2,
+                {timing_post_trial: 0, timing_response: delay3_2, data: {delay: delay3_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_2+delay4_2,
+                {timing_post_trial: 0, timing_response: delay4_2, data: {delay: delay4_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_2+delay5_2,
+                {timing_post_trial: 0, timing_response: delay5_2, data: {delay: delay5_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ],
@@ -606,19 +591,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
+                {timing_post_trial: 0, timing_response: delay1_9, data: {delay: delay1_9},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_9+delay2_9,
+                {timing_post_trial: 0, timing_response: delay2_9, data: {delay: delay2_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_9+delay3_9,
+                {timing_post_trial: 0, timing_response: delay3_9, data: {delay: delay3_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_9+delay4_9,
+                {timing_post_trial: 0, timing_response: delay4_9, data: {delay: delay4_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_9+delay5_9,
+                {timing_post_trial: 0, timing_response: delay5_9, data: {delay: delay5_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ],
@@ -667,19 +652,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
+                {timing_post_trial: 0, timing_response: delay1_3, data: {delay: delay1_3},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_3+delay2_3,
+                {timing_post_trial: 0, timing_response: delay2_3, data: {delay: delay2_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp2_3+delay2_3,
+                {timing_post_trial:0, timing_response: delay2_3, data: {delay: delay3_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_3+delay4_3,
+                {timing_post_trial: 0, timing_response: delay4_3, data: {delay: delay4_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_3+delay5_3,
+                {timing_post_trial: 0, timing_response: delay5_3, data: {delay: delay5_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
@@ -698,19 +683,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
+                {timing_post_trial: 0, timing_response: delay1_10, data: {delay: delay1_10},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_10+delay2_10,
+                {timing_post_trial: 0, timing_response: delay2_10, data: {delay: delay2_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_10+delay3_10,
+                {timing_post_trial:0, timing_response: delay3_10, data: {delay: delay3_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_10+delay4_10,
+                {timing_post_trial: 0, timing_response: delay4_10, data: {delay: delay4_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_10+delay5_10,
+                {timing_post_trial: 0, timing_response: delay5_10, data: {delay: delay5_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
@@ -733,19 +718,19 @@
                 points:points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
+                {timing_post_trial: 0, timing_response: delay1_4, data: {delay: delay1_4},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
+                {timing_post_trial: 0, timing_response: delay2_4, data: {delay: delay2_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
+                {timing_post_trial:0, timing_response: delay3_4, data: {delay: delay3_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
+                {timing_post_trial: 0, timing_response: delay4_4, data: {delay: delay4_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
+                {timing_post_trial: 0, timing_response: delay5_4, data: {delay: delay5_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
@@ -764,19 +749,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
+                {timing_post_trial: 0, timing_response: delay1_11, data: {delay: delay1_11},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_11+delay2_11,
+                {timing_post_trial: 0, timing_response: delay2_11, data: {delay: delay2_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_11+delay3_11,
+                {timing_post_trial:0, timing_response: delay3_11, data: {delay: delay3_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_11+delay4_11,
+                {timing_post_trial: 0, timing_response: delay4_11, data: {delay: delay4_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_11+delay5_11,
+                {timing_post_trial: 0, timing_response: delay5_11, data: {delay: delay5_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
@@ -799,23 +784,24 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
+                {timing_post_trial: 0, timing_response: delay1_5, data: {delay: delay1_5},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_5+delay2_5,
+                {timing_post_trial: 0, timing_response: delay2_5, data: {delay: delay2_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_5+delay3_5,
+                {timing_post_trial:0, timing_response: delay3_5, data: {delay: delay3_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_5+delay4_5,
+                {timing_post_trial: 0, timing_response: delay4_5, data: {delay: delay4_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_5+delay5_5,
+                {timing_post_trial: 0, timing_response: delay5_5, data: {delay: delay5_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
         };
+
 
         var trial_seq_high_4 = {
             type: 'single-stim-special',
@@ -830,19 +816,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
+                {timing_post_trial: 0, timing_response: delay1_12, data: {delay: delay1_12},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
+                {timing_post_trial: 0, timing_response: delay2_12, data: {delay: delay2_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
+                {timing_post_trial:0, timing_response: delay3_12, data: {delay: delay3_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
+                {timing_post_trial: 0, timing_response: delay4_12, data: {delay: delay4_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_12+delay5_12,
+                {timing_post_trial: 0, timing_response: delay5_12, data: {delay: delay5_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
@@ -865,19 +851,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
+                {timing_post_trial: 0, timing_response: delay1_6, data: {delay: delay1_6},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_6+delay2_6,
+                {timing_post_trial: 0, timing_response: delay2_6, data: {delay: delay2_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_6+delay3_6,
+                {timing_post_trial:0, timing_response: delay3_6, data: {delay: delay3_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_6+delay4_6,
+                {timing_post_trial: 0, timing_response: delay4_6, data: {delay: delay4_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_6+delay5_6,
+                {timing_post_trial: 0, timing_response: delay5_6, data: {delay: delay5_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
@@ -896,19 +882,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
+                {timing_post_trial: 0, timing_response: delay1_13, data: {delay: delay1_13},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_13+delay2_13,
+                {timing_post_trial: 0, timing_response: delay2_13, data: {delay: delay2_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_13+delay3_13,
+                {timing_post_trial:0, timing_response: delay3_13, data: {delay: delay3_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_13+delay4_13,
+                {timing_post_trial: 0, timing_response: delay4_13, data: {delay: delay4_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_13+delay5_13,
+                {timing_post_trial: 0, timing_response: delay5_13, data: {delay: delay5_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
@@ -931,19 +917,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
+                {timing_post_trial: 0, timing_response: delay1_7, data: {delay: delay1_7},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_7+delay2_7,
+                {timing_post_trial: 0, timing_response: delay2_7, data: {delay: delay2_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_7+delay3_7,
+                {timing_post_trial:0, timing_response: delay3_7, data: {delay: delay3_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_7+delay4_7,
+                {timing_post_trial: 0, timing_response: delay4_7, data: {delay: delay4_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_7+delay5_7,
+                {timing_post_trial: 0, timing_response: delay5_7, data: {delay: delay5_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
@@ -962,19 +948,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
+                {timing_post_trial: 0, timing_response: delay1_14, data: {delay: delay1_14},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_14+delay2_14,
+                {timing_post_trial: 0, timing_response: delay2_14,data: {delay: delay2_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_14+delay3_14,
+                {timing_post_trial:0, timing_response: delay3_14,data: {delay: delay3_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_14+delay4_14,
+                {timing_post_trial: 0, timing_response: delay4_14,data: {delay: delay4_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_14+delay5_14,
+                {timing_post_trial: 0, timing_response: delay5_14, data: {delay: delay5_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
@@ -997,19 +983,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_8+delay1_8,
+                {timing_post_trial: 0, timing_response: delay1_8, data: {delay: delay1_8},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_8+delay2_8,
+                {timing_post_trial: 0, timing_response: delay2_8, data: {delay: delay2_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_8+delay3_8,
+                {timing_post_trial:0, timing_response: delay3_8, data: {delay: delay3_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_8+delay4_8,
+                {timing_post_trial: 0, timing_response: delay4_8, data: {delay: delay4_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_8+delay5_8,
+                {timing_post_trial: 0, timing_response: delay5_8, data: {delay: delay5_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
@@ -1028,19 +1014,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
+                {timing_post_trial: 0, timing_response: delay1_15, data: {delay: delay1_15},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_15+delay2_15,
+                {timing_post_trial: 0, timing_response: delay2_15, data: {delay: delay2_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_15+delay3_15,
+                {timing_post_trial:0, timing_response: delay3_15, data: {delay: delay3_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_15+delay4_15,
+                {timing_post_trial: 0, timing_response: delay4_15, data: {delay: delay4_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_15+delay5_15,
+                {timing_post_trial: 0, timing_response: delay5_15, data: {delay: delay5_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
@@ -1063,19 +1049,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_9+delay1_9,
+                {timing_post_trial: 0, timing_response: delay1_9, data: {delay: delay1_9},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_9+delay2_9,
+                {timing_post_trial: 0, timing_response: delay2_9, data: {delay: delay2_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_9+delay3_9,
+                {timing_post_trial:0, timing_response: delay3_9, data: {delay: delay3_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_9+delay4_9,
+                {timing_post_trial: 0, timing_response: delay4_9, data: {delay: delay4_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_9+delay5_9,
+                {timing_post_trial: 0, timing_response: delay5_9, data: {delay: delay5_9},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
@@ -1094,19 +1080,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_1+delay1_1,
+                {timing_post_trial: 0, timing_response: delay1_1, data: {delay: delay1_1},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_1+delay2_1,
+                {timing_post_trial: 0, timing_response: delay2_1, data: {delay: delay2_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_1+delay3_1,
+                {timing_post_trial:0, timing_response: delay3_1, data: {delay: delay3_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_1+delay4_1,
+                {timing_post_trial: 0, timing_response: delay4_1, data: {delay: delay4_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_1+delay5_1,
+                {timing_post_trial: 0, timing_response: delay5_1, data: {delay: delay5_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
@@ -1129,19 +1115,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_10+delay1_10,
+                {timing_post_trial: 0, timing_response: delay1_10, data: {delay: delay1_10},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_10+delay2_10,
+                {timing_post_trial: 0, timing_response: delay2_10, data: {delay: delay2_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_10+delay3_10,
+                {timing_post_trial:0, timing_response: delay3_10, data: {delay: delay3_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_10+delay4_10,
+                {timing_post_trial: 0, timing_response: delay4_10, data: {delay: delay4_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_10+delay5_10,
+                {timing_post_trial: 0, timing_response: delay5_10, data: {delay: delay5_10},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ]
@@ -1160,19 +1146,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_2+delay1_2,
+                {timing_post_trial: 0, timing_response: delay1_2, data: {delay: delay1_2},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_2+delay2_2,
+                {timing_post_trial: 0, timing_response: delay2_2, data: {delay: delay2_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_2+delay3_2,
+                {timing_post_trial:0, timing_response: delay3_2, data: {delay: delay3_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_2+delay4_2,
+                {timing_post_trial: 0, timing_response: delay4_2, data: {delay: delay4_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_2+delay5_2,
+                {timing_post_trial: 0, timing_response: delay5_2, data: {delay: delay5_2},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ]
@@ -1195,19 +1181,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_11+delay1_11,
+                {timing_post_trial: 0, timing_response: delay1_11, data: {delay: delay1_11},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_11+delay2_11,
+                {timing_post_trial: 0, timing_response: delay2_11, data: {delay: delay2_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_11+delay3_11,
+                {timing_post_trial:0, timing_response: delay3_11, data: {delay: delay3_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_11+delay4_11,
+                {timing_post_trial: 0, timing_response: delay4_11, data: {delay: delay4_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_11+delay5_11,
+                {timing_post_trial: 0, timing_response: delay5_11, data: {delay: delay5_11},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
@@ -1226,19 +1212,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_3+delay1_3,
+                {timing_post_trial: 0, timing_response: delay1_3, data: {delay: delay1_3},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_3+delay2_3,
+                {timing_post_trial: 0, timing_response: delay2_3, data: {delay: delay2_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_3+delay3_3,
+                {timing_post_trial:0, timing_response: delay3_3, data: {delay: delay3_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_3+delay4_3,
+                {timing_post_trial: 0, timing_response: delay4_3, data: {delay: delay4_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_3+delay5_3,
+                {timing_post_trial: 0, timing_response: delay5_3, data: {delay: delay5_3},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
@@ -1261,19 +1247,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
+                {timing_post_trial: 0, timing_response: delay1_12, data: {delay: delay1_12},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
+                {timing_post_trial: 0, timing_response: delay2_12, data: {delay: delay2_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
+                {timing_post_trial:0, timing_response: delay3_12, data: {delay: delay3_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
+                {timing_post_trial: 0, timing_response:delay4_12, data: {delay: delay4_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_12+delay5_12,
+                {timing_post_trial: 0, timing_response: delay5_12, data: {delay: delay5_12},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
@@ -1292,19 +1278,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
+                {timing_post_trial: 0, timing_response: delay1_4, data: {delay: delay1_4},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
+                {timing_post_trial: 0, timing_response: delay2_4, data: {delay: delay2_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
+                {timing_post_trial:0, timing_response: delay3_4, data: {delay: delay3_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
+                {timing_post_trial: 0, timing_response: delay4_4, data: {delay: delay4_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
+                {timing_post_trial: 0, timing_response: delay5_4, data: {delay: delay5_4},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
@@ -1327,19 +1313,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_12+delay1_12,
+                {timing_post_trial: 0, timing_response: delay1_13, data: {delay: delay1_13},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_12+delay2_12,
+                {timing_post_trial: 0, timing_response: delay2_13, data: {delay: delay2_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_12+delay3_12,
+                {timing_post_trial:0, timing_response: delay3_13, data: {delay: delay3_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_12+delay4_12,
+                {timing_post_trial: 0, timing_response: delay4_13, data: {delay: delay4_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_12+delay5_12,
+                {timing_post_trial: 0, timing_response: delay5_13, data: {delay: delay5_13},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
@@ -1358,19 +1344,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_4+delay1_4,
+                {timing_post_trial: 0, timing_response: delay1_5, data: {delay: delay1_5},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_4+delay2_4,
+                {timing_post_trial: 0, timing_response: delay2_5, data: {delay: delay2_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_4+delay3_4,
+                {timing_post_trial:0, timing_response: delay3_5, data: {delay: delay3_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_4+delay4_4,
+                {timing_post_trial: 0, timing_response: delay4_5, data: {delay: delay4_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_4+delay5_4,
+                {timing_post_trial: 0, timing_response: delay5_5,  data: {delay: delay5_5},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
@@ -1393,19 +1379,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_13+delay1_13,
+                {timing_post_trial: 0, timing_response: delay1_14,  data: {delay: delay1_14},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_13+delay2_13,
+                {timing_post_trial: 0, timing_response: delay2_14,  data: {delay: delay2_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_13+delay3_13,
+                {timing_post_trial:0, timing_response: delay3_14,  data: {delay: delay3_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_13+delay4_13,
+                {timing_post_trial: 0, timing_response: delay4_14,  data: {delay: delay4_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_13+delay5_13,
+                {timing_post_trial: 0, timing_response: delay5_14,  data: {delay: delay5_14},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
@@ -1424,19 +1410,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_5+delay1_5,
+                {timing_post_trial: 0, timing_response: delay1_6,  data: {delay: delay1_6},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_5+delay2_5,
+                {timing_post_trial: 0, timing_response: delay2_6,  data: {delay: delay2_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_5+delay3_5,
+                {timing_post_trial:0, timing_response: delay3_6,  data: {delay: delay3_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_5+delay4_5,
+                {timing_post_trial: 0, timing_response: delay4_6,  data: {delay: delay4_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_5+delay5_5,
+                {timing_post_trial: 0, timing_response: delay5_6,  data: {delay: delay5_6},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
@@ -1459,19 +1445,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_14+delay1_14,
+                {timing_post_trial: 0, timing_response: delay1_15,  data: {delay: delay1_15},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_14+delay2_14,
+                {timing_post_trial: 0, timing_response: delay2_15,  data: {delay: delay2_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_14+delay3_14,
+                {timing_post_trial:0, timing_response: delay3_15,  data: {delay: delay3_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_14+delay4_14,
+                {timing_post_trial: 0, timing_response: delay4_15,  data: {delay: delay4_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_14+delay5_14,
+                {timing_post_trial: 0, timing_response: delay5_15,  data: {delay: delay5_15},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
@@ -1490,19 +1476,19 @@
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_6+delay1_6,
+                {timing_post_trial: 0, timing_response: delay1_7,  data: {delay: delay1_7},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_6+delay2_6,
+                {timing_post_trial: 0, timing_response: delay2_7,  data: {delay: delay2_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_6+delay3_6,
+                {timing_post_trial:0, timing_response: delay3_7,  data: {delay: delay3_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_6+delay4_6,
+                {timing_post_trial: 0, timing_response: delay4_7,  data: {delay: delay4_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_6+delay5_6,
+                {timing_post_trial: 0, timing_response: delay5_7,  data: {delay: delay5_7},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
@@ -1525,19 +1511,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_15+delay1_15,
+                {timing_post_trial: 0, timing_response: delay1_1,  data: {delay: delay1_1},
                     prompt: function () {points_low = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_15+delay2_15,
+                {timing_post_trial: 0, timing_response: delay2_1,  data: {delay: delay2_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_15+delay3_15,
+                {timing_post_trial:0, timing_response: delay3_1,  data: {delay: delay3_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_15+delay4_15,
+                {timing_post_trial: 0, timing_response: delay4_1,  data: {delay: delay4_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_15+delay5_15,
+                {timing_post_trial: 0, timing_response: delay5_1,  data: {delay: delay5_1},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
             ]
@@ -1556,19 +1542,19 @@
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
-                {timing_post_trial: 0, timing_response: allow_resp1_7+delay1_7,
+                {timing_post_trial: 0, timing_response: delay1_8,  data: {delay: delay1_8},
                     prompt: function () {points_high = 0;
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp2_7+delay2_7,
+                {timing_post_trial: 0, timing_response: delay2_8,  data: {delay: delay2_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial:0, timing_response: allow_resp3_7+delay3_7,
+                {timing_post_trial:0, timing_response: delay3_8,  data: {delay: delay3_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp4_7+delay4_7,
+                {timing_post_trial: 0, timing_response: delay4_8,  data: {delay: delay4_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
-                {timing_post_trial: 0, timing_response: allow_resp5_7+delay5_7,
+                {timing_post_trial: 0, timing_response: delay5_8,  data: {delay: delay5_8},
                     prompt: function () {
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ]
@@ -1585,38 +1571,38 @@
         };
 
 
-        var core_node_low_max = {timeline: [initial_countdown, first_trial_buffer, trial_seq_low_max, initial_countdown, first_trial_buffer, trial_seq_high_max, instructions_main, instructions_hand, almost_start]};
-        var core_node_high_max = {timeline: [initial_countdown, first_trial_buffer, trial_seq_high_max, initial_countdown,first_trial_buffer, trial_seq_low_max, instructions_main, instructions_hand, almost_start]};
-        var core_node_low_1 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_1, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_1, total_points]};
-        var core_node_high_1 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_1, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_1, total_points]};
-        var core_node_low_2 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_2, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_2, total_points]};
-        var core_node_high_2 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_2, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_2, total_points]};
-        var core_node_low_3 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_3, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_3, total_points]};
-        var core_node_high_3 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_3, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_3, total_points]};
-        var core_node_low_4 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_4, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_4, total_points]};
-        var core_node_high_4 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_4, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_4, total_points]};
-        var core_node_low_5 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_5, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_5, total_points]};
-        var core_node_high_5 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_5, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_5, total_points]};
-        var core_node_low_6 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_6, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_6, total_points]};
-        var core_node_high_6 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_6, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_6, total_points]};
-        var core_node_low_7 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_7, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_7, total_points]};
-        var core_node_high_7 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_7, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_7, total_points]};
-        var core_node_low_8 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_8, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_8, total_points]};
-        var core_node_high_8 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_8, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_8, total_points]};
-        var core_node_low_9 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_9, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_9, total_points]};
-        var core_node_high_9 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_9, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_9, total_points]};
-        var core_node_low_10 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_10, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_10, total_points]};
-        var core_node_high_10 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_10, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_10, total_points]};
-        var core_node_low_11 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_11, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_11, total_points]};
-        var core_node_high_11 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_11, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_11, total_points]};
-        var core_node_low_12 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_12, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_12, total_points]};
-        var core_node_high_12 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_12, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_12, total_points]};
-        var core_node_low_13 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_13, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_13, total_points]};
-        var core_node_high_13 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_13, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_13, total_points]};
-        var core_node_low_14 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_14, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_14, total_points]};
-        var core_node_high_14 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_14, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_14, total_points]};
-        var core_node_low_15 = {timeline: [round_info_low, initial_countdown, first_trial_buffer, trial_seq_low_15, round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_15, total_points]};
-        var core_node_high_15 = {timeline: [round_info_high, initial_countdown, first_trial_buffer, trial_seq_high_15, round_info_low, initial_countdown,first_trial_buffer, trial_seq_low_15, total_points]};
+        var core_node_low_max = {timeline: [initial_countdown, buffer1, trial_seq_low_max, initial_countdown, buffer8, trial_seq_high_max, instructions_main, instructions_hand, almost_start]};
+        var core_node_high_max = {timeline: [initial_countdown, buffer8, trial_seq_high_max, initial_countdown,buffer1, trial_seq_low_max, instructions_main, instructions_hand, almost_start]};
+        var core_node_low_1 = {timeline: [round_info_low, initial_countdown, buffer2, trial_seq_low_1, round_info_high, initial_countdown, buffer9, trial_seq_high_1, total_points]};
+        var core_node_high_1 = {timeline: [round_info_high, initial_countdown, buffer9, trial_seq_high_1, round_info_low, initial_countdown,buffer2, trial_seq_low_1, total_points]};
+        var core_node_low_2 = {timeline: [round_info_low, initial_countdown, buffer3, trial_seq_low_2, round_info_high, initial_countdown, buffer10, trial_seq_high_2, total_points]};
+        var core_node_high_2 = {timeline: [round_info_high, initial_countdown, buffer10, trial_seq_high_2, round_info_low, initial_countdown,buffer3, trial_seq_low_2, total_points]};
+        var core_node_low_3 = {timeline: [round_info_low, initial_countdown, buffer4, trial_seq_low_3, round_info_high, initial_countdown, buffer11, trial_seq_high_3, total_points]};
+        var core_node_high_3 = {timeline: [round_info_high, initial_countdown, buffer11, trial_seq_high_3, round_info_low, initial_countdown,buffer4, trial_seq_low_3, total_points]};
+        var core_node_low_4 = {timeline: [round_info_low, initial_countdown, buffer5, trial_seq_low_4, round_info_high, initial_countdown, buffer12, trial_seq_high_4, total_points]};
+        var core_node_high_4 = {timeline: [round_info_high, initial_countdown, buffer12, trial_seq_high_4, round_info_low, initial_countdown,buffer5, trial_seq_low_4, total_points]};
+        var core_node_low_5 = {timeline: [round_info_low, initial_countdown, buffer6, trial_seq_low_5, round_info_high, initial_countdown, buffer13, trial_seq_high_5, total_points]};
+        var core_node_high_5 = {timeline: [round_info_high, initial_countdown, buffer13, trial_seq_high_5, round_info_low, initial_countdown,buffer6, trial_seq_low_5, total_points]};
+        var core_node_low_6 = {timeline: [round_info_low, initial_countdown, buffer7, trial_seq_low_6, round_info_high, initial_countdown, buffer14, trial_seq_high_6, total_points]};
+        var core_node_high_6 = {timeline: [round_info_high, initial_countdown, buffer14, trial_seq_high_6, round_info_low, initial_countdown,buffer7, trial_seq_low_6, total_points]};
+        var core_node_low_7 = {timeline: [round_info_low, initial_countdown, buffer8, trial_seq_low_7, round_info_high, initial_countdown, buffer15, trial_seq_high_7, total_points]};
+        var core_node_high_7 = {timeline: [round_info_high, initial_countdown, buffer15, trial_seq_high_7, round_info_low, initial_countdown,buffer8, trial_seq_low_7, total_points]};
+        var core_node_low_8 = {timeline: [round_info_low, initial_countdown, buffer9, trial_seq_low_8, round_info_high, initial_countdown, buffer1, trial_seq_high_8, total_points]};
+        var core_node_high_8 = {timeline: [round_info_high, initial_countdown, buffer1, trial_seq_high_8, round_info_low, initial_countdown,buffer9, trial_seq_low_8, total_points]};
+        var core_node_low_9 = {timeline: [round_info_low, initial_countdown, buffer10, trial_seq_low_9, round_info_high, initial_countdown, buffer2, trial_seq_high_9, total_points]};
+        var core_node_high_9 = {timeline: [round_info_high, initial_countdown, buffer2, trial_seq_high_9, round_info_low, initial_countdown,buffer10, trial_seq_low_9, total_points]};
+        var core_node_low_10 = {timeline: [round_info_low, initial_countdown, buffer11, trial_seq_low_10, round_info_high, initial_countdown, buffer3, trial_seq_high_10, total_points]};
+        var core_node_high_10 = {timeline: [round_info_high, initial_countdown, buffer3, trial_seq_high_10, round_info_low, initial_countdown,buffer11, trial_seq_low_10, total_points]};
+        var core_node_low_11 = {timeline: [round_info_low, initial_countdown, buffer12, trial_seq_low_11, round_info_high, initial_countdown, buffer4, trial_seq_high_11, total_points]};
+        var core_node_high_11 = {timeline: [round_info_high, initial_countdown, buffer4, trial_seq_high_11, round_info_low, initial_countdown,buffer12, trial_seq_low_11, total_points]};
+        var core_node_low_12 = {timeline: [round_info_low, initial_countdown, buffer13, trial_seq_low_12, round_info_high, initial_countdown, buffer5, trial_seq_high_12, total_points]};
+        var core_node_high_12 = {timeline: [round_info_high, initial_countdown, buffer5, trial_seq_high_12, round_info_low, initial_countdown,buffer13, trial_seq_low_12, total_points]};
+        var core_node_low_13 = {timeline: [round_info_low, initial_countdown, buffer14, trial_seq_low_13, round_info_high, initial_countdown, buffer6, trial_seq_high_13, total_points]};
+        var core_node_high_13 = {timeline: [round_info_high, initial_countdown, buffer6, trial_seq_high_13, round_info_low, initial_countdown,buffer14, trial_seq_low_13, total_points]};
+        var core_node_low_14 = {timeline: [round_info_low, initial_countdown, buffer15, trial_seq_low_14, round_info_high, initial_countdown, buffer7, trial_seq_high_14, total_points]};
+        var core_node_high_14 = {timeline: [round_info_high, initial_countdown, buffer7, trial_seq_high_14, round_info_low, initial_countdown,buffer15, trial_seq_low_14, total_points]};
+        var core_node_low_15 = {timeline: [round_info_low, initial_countdown, buffer1, trial_seq_low_15, round_info_high, initial_countdown, buffer8, trial_seq_high_15, total_points]};
+        var core_node_high_15 = {timeline: [round_info_high, initial_countdown, buffer8, trial_seq_high_15, round_info_low, initial_countdown,buffer1, trial_seq_low_15, total_points]};
 
 
         /* this is used to initialize the correct sequence */
@@ -1674,7 +1660,10 @@
                 fullscreen: true,
                 display_element: $('#jspsych_target'),
                 default_iti: 0,
-                on_finish: function () {
+                on_finish: function() {
+            jsPsych.data.displayData('csv');
+        }
+/*                on_finish: function () {
                     $.ajax({
                         type: "POST",
                         url: "/experiment-data",
@@ -1687,9 +1676,9 @@
                         .fail(function () {
                             alert("a problem occurred while writing to the database. plaese contact the research for more information.");
                             window.location.href = "/";
-                        })
-                }
-            });
+                        }) */
+                })
+            /* }); */
 
     </script>
 </html>

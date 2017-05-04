@@ -124,7 +124,7 @@ jsPsych.plugins["single-stim-special"] = (function() {
               id: 'jspsych-single-stim-pic-prompt'
           }))}
       else {
-          points_low = points_low -10;
+          points_low = points_low -3;
         display_element.append(function () {return "<p style='text-align:center; position: relative; top: -7.15pc; font-size: 40pt'>Punkte: "+points_low+" </p></div>"});
         display_element.append($('<div>', {
           html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
@@ -165,7 +165,7 @@ jsPsych.plugins["single-stim-special"] = (function() {
                     id: 'jspsych-single-stim-pic-prompt'
                 }))}
         else {
-          points_high = points_high -10;
+          points_high = points_high - 30;
           display_element.append(function () {return "<p style='text-align:center; position: relative; top: -7.15pc; font-size: 40pt'>Punkte: "+points_high+" </p></div>"});
           display_element.append($('<div>', {
             html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
