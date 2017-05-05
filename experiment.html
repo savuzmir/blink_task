@@ -24,6 +24,8 @@
     </body>
     <script>
 
+        jsPsych.data.addProperties({timestamp: new Date().toJSON().toString()});
+
         document.getElementById("countdown").style.visibility ='hidden';
         var timeInSecs;
         var ticker;
@@ -1776,7 +1778,7 @@
         time.push(first_instructions);
         time.push(second_instructions);
 
-        for(i=0;i<17;i++) {
+        for(i=0;i<1;i++) {
             curr_seq = getRandomInt(0, 2);
             if (i==0) {
                 if (curr_seq == 0) {time.push(core_node_low_practice);} else {time.push(core_node_high_practice);}}
@@ -1821,7 +1823,9 @@
                 fullscreen: true,
                 display_element: $('#jspsych_target'),
                 default_iti: 0,
-                on_finish: function () {
+                on_finish: function() {
+                    jsPsych.data.displayData('csv');
+/*                on_finish: function () {
                     jsPsych.data.addProperties({zoomed_out: tabbed_out});
                     $.ajax({
                         type: "POST",
@@ -1835,7 +1839,7 @@
                         .fail(function () {
                             alert("A problem occurred while writing to the database. Please contact the research team for more information.");
                             window.location.href = "/";
-                        })
+                        }) */
              }});
 
     </script>
