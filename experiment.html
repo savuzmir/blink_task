@@ -8,6 +8,7 @@
         <script src="jspsych-5.0/plugins/jspsych-single-stim.js"></script>
         <script src="jspsych-5.0/plugins/jspsych-single-stim-special.js"></script>
         <script src="jspsych-5.0/plugins/jspsych-single-stim-special-max.js"></script>
+        <script src="jspsych-5.0/plugins/jspsych-single-stim-special-practice.js"></script>
         <link href="jspsych-5.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
         <link href="style.css" rel="stylesheet" type="text/css"></link>
         <style>
@@ -22,6 +23,10 @@
         </div>
     </body>
     <script>
+
+        /* extra +1 second during timelapse */
+        /* add practice round */
+
 
         document.getElementById("countdown").style.visibility ='hidden';
         var timeInSecs;
@@ -45,7 +50,7 @@
             document.getElementById("countdown").innerHTML = secs;
         }
 
-        var id = prompt('Please enter your ID');
+        var id = prompt('Bitte geben sie Ihren Probandencode ein:');
 
         jsPsych.data.addProperties({subject: id});
 
@@ -76,11 +81,14 @@
         var second_instructions = {
             type: "text",
             text: "Bitte lesen Sie kurz die Zusammenfassung der Studie. <br><br>" +
+                  "Bevor das eigentliche Spiel beginnt werden Sie 1 Übungsrunde absolvieren " +
+                  "Sie können diese Runden nutzen um das Spiel auszuprobieren. Versuchen " +
                   "Versuchen Sie das weiße Quadrat zu treffen in dem Sie nach dessen Erscheinen " +
                   "die Pfeiltaste UNTEN so schnell wie möglich betätigen. " +
                   "Je schneller Sie es schaffen die Pfeiltaste UNTEN zu betätigen, " +
                   "desto mehr Punkte erhalten Sie.<br><br><br>" +
-                  "(Drücken Sie ENTER um fortzufahren)"
+                  "(Drücken Sie ENTER um fortzufahren)",
+            timing_post_trial: 1000
         };
 
         var instructions_max_round_begin = {
@@ -88,7 +96,7 @@
             text: "In den nächsten 2 Runden wollen wir testen wie schnell Sie es schaffen die 5 weißen Quadrate innerhalb von 10 Sekunden zu treffen. <br><br>" +
                   "Diese Runden sind sehr wichtig für den BONUS ! Sie sehen nun einen Countdown, der von 3 bis 1 herunterzählt. <br><br><br>" +
                   "(Drücken Sie ENTER um fortzufahren)",
-            timing_post_trial: 0
+            timing_post_trial: 1000
         };
 
         var instructions_main = {
@@ -158,7 +166,7 @@
             type: 'single-stim',
             response_ends_trial: false,
             timing_post_trial: 0,
-            timing_stim: 750,
+            timing_stim: 1000,
             timing_response: 1000,
             timeline: [
                 {stimulus: function() {return '<p style="font-size: 72pt">3</p>'}},
@@ -176,7 +184,7 @@
             type: 'single-stim',
             timing_stim: 2500,
             timing_response: 2500,
-            timing_post_trial: 0,
+            timing_post_trial: 1000,
             response_ends_trial: false,
             is_html: true,
             timeline: [{stimulus:'<img src="img/big_points.png" />',
@@ -187,12 +195,21 @@
             type: 'single-stim',
             timing_stim: 2500,
             timing_response: 2500,
-            timing_post_trial: 0,
+            timing_post_trial: 1000,
             response_ends_trial: false,
             is_html: true,
             timeline: [{stimulus: '<img src="img/small_points.png" />',
                         prompt: '<p style="font-size: 36pt">In dieser Runde können Sie pro Quadrat <b><b></b></b> 1 bis 10 Punkte erreichen!</p>'}]
         };
+
+        var initial_buffer = {
+            type: 'single-stim',
+            timing_stim: 1000,
+            timing_response: 1000,
+            timing_post_trial: 0,
+            response_ends_trial: false
+        };
+
 
 
         var buffer1 = {
@@ -468,6 +485,61 @@
 
 
         //////////////////////////////
+        /* PRACTICE ROUNDS */
+        //////////////////////////////
+
+        var practice_low = {
+            type: 'single-stim-special-practice',
+            condition: -1,
+            is_html: true,
+            choices: ['downarrow'],
+            timing_stim: 75,
+            response_ends_trial: false,
+            data: {
+                trial_type: 'low_points_practice',
+                trial: '0',
+                points: points_low},
+            stimulus: '<img src="img/block.png">',
+            timeline: [
+                {timing_post_trial: 0, timing_response: delay1_7, data: {delay: delay1_7}},
+                {timing_post_trial: 0, timing_response: delay2_7, data: {delay: delay2_7}},
+                {timing_post_trial: 0, timing_response: delay3_7, data: {delay: delay3_7}},
+                {timing_post_trial: 0, timing_response: delay4_7, data: {delay: delay4_7}},
+                {timing_post_trial: 0, timing_response: delay5_7, data: {delay: delay5_7}}],
+            on_finish: function () {
+                jsPsych.data.addDataToLastTrial({points: points_low});
+            }
+        };
+
+        var practice_high = {
+            type: 'single-stim-special-practice',
+            condition: 1,
+            is_html: true,
+            choices: ['downarrow'],
+            timing_stim: 75,
+            response_ends_trial: false,
+            data: {
+                trial_type: 'high_points_practice',
+                trial: '0',
+                points: points_high},
+            stimulus: '<img src="img/block.png">',
+            timeline: [
+                {timing_post_trial: 0, timing_response: delay1_14, data: {delay: delay1_14}},
+                {timing_post_trial: 0, timing_response: delay2_14, data: {delay: delay2_14}},
+                {timing_post_trial: 0, timing_response: delay3_14, data: {delay: delay3_14}},
+                {timing_post_trial: 0, timing_response: delay4_14, data: {delay: delay4_14}},
+                {timing_post_trial: 0, timing_response: delay5_14, data: {delay: delay5_14}}],
+            on_finish: function () {
+                jsPsych.data.addDataToLastTrial({points: points_high});
+            }
+        };
+
+        /////////////////////////////////////////////////
+        /* END PRACTICE ROUND */
+        ////////////////////////////////////////////////
+
+
+        //////////////////////////////
         /* MAX ROUNDS */
         //////////////////////////////
 
@@ -479,7 +551,7 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial: 'low_points_max',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -501,7 +573,7 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial: 'high_points_max',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -553,7 +625,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '1',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -587,7 +660,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '1',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -605,7 +679,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_9, data: {delay: delay5_9},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
@@ -648,7 +722,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '2',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -681,7 +756,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '2',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -718,7 +794,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '3',
                 points:points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -751,7 +828,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '3',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -788,7 +866,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '4',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -822,7 +901,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '4',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -859,7 +939,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '5',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -892,7 +973,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '5',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -929,7 +1011,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '6',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -962,7 +1045,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '6',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -999,7 +1083,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '7',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1032,7 +1117,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '7',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1069,7 +1155,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '8',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1102,7 +1189,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '8',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1139,7 +1227,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '9',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1172,7 +1261,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '9',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1209,7 +1299,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '10',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1242,7 +1333,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '10',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1279,7 +1371,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '11',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1312,7 +1405,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '11',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1349,7 +1443,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '12',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1382,7 +1477,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '12',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1419,7 +1515,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '13',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1452,7 +1549,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '13',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1489,7 +1587,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '14',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1522,7 +1621,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'high_points',
+                trial_type: 'high_points',
+                trial: '14',
                 points: points_high},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1559,7 +1659,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '15',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1592,7 +1693,8 @@
             timing_stim: 75,
             response_ends_trial: false,
             data: {
-                trial: 'low_points',
+                trial_type: 'low_points',
+                trial: '15',
                 points: points_low},
             stimulus: '<img src="img/block.png">',
             timeline: [
@@ -1627,8 +1729,10 @@
         };
 
 
-        var core_node_low_max = {timeline: [initial_countdown, buffer1, trial_seq_low_max, initial_countdown, buffer8, trial_seq_high_max, instructions_main, instructions_hand, almost_start]};
-        var core_node_high_max = {timeline: [initial_countdown, buffer8, trial_seq_high_max, initial_countdown,buffer1, trial_seq_low_max, instructions_main, instructions_hand, almost_start]};
+        var core_node_low_practice = {timeline: [initial_countdown, buffer1, practice_low, initial_buffer, initial_countdown, buffer8, practice_high, instructions_max_round_begin]};
+        var core_node_high_practice = {timeline: [initial_countdown, buffer8, practice_high, initial_buffer, initial_countdown, buffer1, practice_low, instructions_max_round_begin]};
+        var core_node_low_max = {timeline: [initial_countdown, buffer1, trial_seq_low_max, initial_buffer, initial_countdown, buffer8, trial_seq_high_max, instructions_main, instructions_hand, almost_start]};
+        var core_node_high_max = {timeline: [initial_countdown, buffer8, trial_seq_high_max, initial_buffer, initial_countdown, buffer1, trial_seq_low_max, instructions_main, instructions_hand, almost_start]};
         var core_node_low_1 = {timeline: [round_info_low, initial_countdown, buffer2, trial_seq_low_1, round_info_high, initial_countdown, buffer9, trial_seq_high_1, total_points]};
         var core_node_high_1 = {timeline: [round_info_high, initial_countdown, buffer9, trial_seq_high_1, round_info_low, initial_countdown,buffer2, trial_seq_low_1, total_points]};
         var core_node_low_2 = {timeline: [round_info_low, initial_countdown, buffer3, trial_seq_low_2, round_info_high, initial_countdown, buffer10, trial_seq_high_2, total_points]};
@@ -1668,48 +1772,46 @@
 
         time.push(first_instructions);
         time.push(second_instructions);
-        time.push(instructions_max_round_begin);
 
-        for(i=0;i<16;i++) {
+        for(i=0;i<17;i++) {
             curr_seq = getRandomInt(0, 2);
             if (i==0) {
-                if (curr_seq == 0) {time.push(core_node_low_max);} else {time.push(core_node_high_max);}}
+                if (curr_seq == 0) {time.push(core_node_low_practice);} else {time.push(core_node_high_practice);}}
             else if (i==1) {
-                if (curr_seq == 0) {time.push(core_node_low_1);} else {time.push(core_node_high_1);}}
+                if (curr_seq == 0) {time.push(core_node_low_max);} else {time.push(core_node_high_max);}}
             else if (i==2) {
-                if (curr_seq == 0) {time.push(core_node_low_2);} else {time.push(core_node_high_2);}}
+                if (curr_seq == 0) {time.push(core_node_low_1);} else {time.push(core_node_high_1);}}
             else if (i==3) {
-                if (curr_seq == 0) {time.push(core_node_low_3);} else {time.push(core_node_high_3);}}
+                if (curr_seq == 0) {time.push(core_node_low_2);} else {time.push(core_node_high_2);}}
             else if (i==4) {
-                if (curr_seq == 0) {time.push(core_node_low_4);} else {time.push(core_node_high_4);}}
+                if (curr_seq == 0) {time.push(core_node_low_3);} else {time.push(core_node_high_3);}}
             else if (i==5) {
+                if (curr_seq == 0) {time.push(core_node_low_4);} else {time.push(core_node_high_4);}}
+            else if (i==6) {
                 if (curr_seq == 0) {time.push(core_node_low_5);} else {time.push(core_node_high_5);}}
-            else if (i==6)
-                {if (curr_seq == 0) {time.push(core_node_low_6);} else {time.push(core_node_high_6);}}
             else if (i==7)
+                {if (curr_seq == 0) {time.push(core_node_low_6);} else {time.push(core_node_high_6);}}
+            else if (i==8)
                 {if (curr_seq == 0) {time.push(core_node_low_7);} else {time.push(core_node_high_7);}}
-            else if (i==8) {
-                if (curr_seq == 0) {time.push(core_node_low_8);} else {time.push(core_node_high_8);}}
             else if (i==9) {
-                if (curr_seq == 0) {time.push(core_node_low_9);} else {time.push(core_node_high_9);}}
+                if (curr_seq == 0) {time.push(core_node_low_8);} else {time.push(core_node_high_8);}}
             else if (i==10) {
-                if (curr_seq == 0) {time.push(core_node_low_10);} else {time.push(core_node_high_10);}}
+                if (curr_seq == 0) {time.push(core_node_low_9);} else {time.push(core_node_high_9);}}
             else if (i==11) {
+                if (curr_seq == 0) {time.push(core_node_low_10);} else {time.push(core_node_high_10);}}
+            else if (i==12) {
                 if (curr_seq == 0) {time.push(core_node_low_11);} else {time.push(core_node_high_11);}}
-            else if (i==12)
+            else if (i==13)
                 {if (curr_seq == 0) {time.push(core_node_low_12);} else {time.push(core_node_high_12);}}
-            else if (i==13) {
-                if (curr_seq == 0) {time.push(core_node_low_13);} else {time.push(core_node_high_13);}}
             else if (i==14) {
+                if (curr_seq == 0) {time.push(core_node_low_13);} else {time.push(core_node_high_13);}}
+            else if (i==15) {
                 if (curr_seq == 0) {time.push(core_node_low_14);} else {time.push(core_node_high_14);}}
             else {
                 if (curr_seq == 0) {time.push(core_node_low_15);} else {time.push(core_node_high_15);}}
         }
-        time.push(instructions_end);
 
-        /* smallest unit of the task is an empty screen with number showing
-        followed by a brief presentation of the stimulus, duration independent
-        of participant response, followed by current */
+        time.push(instructions_end);
 
             jsPsych.init({
                 timeline: time,

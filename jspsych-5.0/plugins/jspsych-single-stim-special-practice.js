@@ -8,12 +8,11 @@
  *
  **/
 
-
-jsPsych.plugins["single-stim-special"] = (function() {
+jsPsych.plugins["single-stim-special-practice"] = (function() {
 
   var plugin = {};
 
-  jsPsych.pluginAPI.registerPreload('single-stim-special', 'stimulus', 'image');
+  jsPsych.pluginAPI.registerPreload('single-stim-special-practice', 'stimulus', 'image');
 
   plugin.trial = function(display_element, trial) {
 
@@ -29,10 +28,7 @@ jsPsych.plugins["single-stim-special"] = (function() {
     trial.timing_response = trial.timing_response || -1;
     trial.is_html = (typeof trial.is_html == 'undefined') ? false : trial.is_html;
     trial.prompt = trial.prompt || "";
-    trial.pic_prompt = trial.pic_prompt || "";
     trial.condition = trial.condition || "undefined";
-    trial.reaction_time = trial.reaction_time || "undefined";
-    trial.timing = trial.timing || "undefined";
 
     // this array holds handlers from setTimeout calls
     // that need to be cleared if the trial ends early
@@ -47,8 +43,6 @@ jsPsych.plugins["single-stim-special"] = (function() {
       }));
 
 
-      //show prompt if there is one
-      display_element.append(trial.prompt);
 
     // store response
     var response = {
@@ -86,94 +80,86 @@ jsPsych.plugins["single-stim-special"] = (function() {
       jsPsych.finishTrial(trial_data);
     };
 
+
       // function to handle responses by the subject
     var after_response = function(info) {
-
         display_element.html('');
-
-        if (trial.condition == -1) {
-        if (info.rt >= 1 && info.rt <= (trial.reaction_time - 150)&& press==0) {
+      if (trial.condition == -1) {
+        if (info.rt >= 1 && info.rt <= 225 && press==0) {
             points_low += 10}
-        else if (info.rt >= (trial.reaction_time-150) && info.rt < (trial.reaction_time-100)&& press==0) {
+        else if (info.rt >= 225 && info.rt < 275 && press==0) {
             points_low += 9}
-        else if (info.rt >= (trial.reaction_time -100) && info.rt < (trial.reaction_time-50)&& press==0) {
+        else if (info.rt >= 275 && info.rt < 325 && press==0) {
             points_low  += 8}
-        else if (info.rt >= (trial.reaction_time-50) && info.rt < trial.reaction_time && press==0) {
+        else if (info.rt >= 325 && info.rt < 375 && press==0) {
             points_low += 7}
-        else if (info.rt >= trial.reaction_time && info.rt < (trial.reaction_time+50)&& press==0) {
+        else if (info.rt >= 375 && info.rt < 425 && press==0) {
             points_low += 6}
-        else if (info.rt >= (trial.reaction_time+50) && info.rt < (trial.reaction_time+100)&& press==0) {
-            points_low  += 5}
-        else if (info.rt >= (trial.reaction_time+100) && info.rt < (trial.reaction_time+150)&& press==0) {
+        else if (info.rt >= 425 && info.rt < 475 && press==0) {
+            points_low += 5}
+        else if (info.rt >= 475 && info.rt < 525 && press==0) {
             points_low += 4}
-        else if (info.rt >= (trial.reaction_time+150) && info.rt < (trial.reaction_time+200)&& press==0) {
-            points_low  += 3}
-        else if (info.rt >= (trial.reaction_time+200) && info.rt < (trial.reaction_time+250) && press==0) {
+        else if (info.rt >= 525 && info.rt < 575 && press==0) {
+            points_low += 3}
+        else if (info.rt >= 575 && info.rt < 625 && press==0) {
             points_low += 2}
-        else if (info.rt >= trial.reaction_time+250 && press==0) {
-            points_low  += 1}
+        else if (info.rt >= 625 && press==0) {
+            points_low += 1}
       if (press==0 && info.rt < 1000) {
-          display_element.append(function () {return "<p style='text-align:center; position: relative; top: -7.15pc; font-size: 40pt'>Punkte: "+points_low+" </p></div>"});
           display_element.append($('<div>', {
             html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/correct.png">',
               id: 'jspsych-single-stim-pic-prompt'
         }))}
       else if (press==0 && info.rt > 1000) {
-          display_element.append(function () {return "<p style='text-align:center; position: relative; top: -7.15pc; font-size: 40pt'>Punkte: "+points_low+" </p></div>"});
           display_element.append($('<div>', {
             html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
       else {
           points_low = points_low -3;
-        display_element.append(function () {return "<p style='text-align:center; position: relative; top: -7.15pc; font-size: 40pt'>Punkte: "+points_low+" </p></div>"});
         display_element.append($('<div>', {
           html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
             id: 'jspsych-single-stim-pic-prompt'
         }));
       }}
       else if (trial.condition == 1) {
-          if (info.rt >= 1 && info.rt <= (trial.reaction_time - 150)&& press==0) {
+          if (info.rt >= 1 && info.rt <= 225 && press==0) {
               points_high += 100}
-          else if (info.rt >= (trial.reaction_time-150) && info.rt < (trial.reaction_time-100)&& press==0) {
+          else if (info.rt >= 225 && info.rt < 275 && press==0) {
               points_high += 90}
-          else if (info.rt >= (trial.reaction_time -100) && info.rt < (trial.reaction_time-50)&& press==0) {
+          else if (info.rt >= 275 && info.rt < 325 && press==0) {
               points_high  += 80}
-          else if (info.rt >= (trial.reaction_time-50) && info.rt < trial.reaction_time && press==0) {
+          else if (info.rt >= 325 && info.rt < 375 && press==0) {
               points_high += 70}
-          else if (info.rt >= trial.reaction_time && info.rt < (trial.reaction_time+50) && press==0) {
+          else if (info.rt >= 375 && info.rt < 425 && press==0) {
               points_high += 60}
-          else if (info.rt >= (trial.reaction_time+50) && info.rt < (trial.reaction_time+100) && press==0) {
-              points_high  += 50}
-          else if (info.rt >= (trial.reaction_time+100) && info.rt < (trial.reaction_time+150) && press==0) {
+          else if (info.rt >= 425 && info.rt < 475 && press==0) {
+              points_high += 50}
+          else if (info.rt >= 475 && info.rt < 525 && press==0) {
               points_high += 40}
-          else if (info.rt >= (trial.reaction_time+150) && info.rt < (trial.reaction_time+200) && press==0) {
-              points_high  += 30}
-          else if (info.rt >= (trial.reaction_time+200) && info.rt < (trial.reaction_time+250) && press==0) {
+          else if (info.rt >= 525 && info.rt < 575 && press==0) {
+              points_high += 30}
+          else if (info.rt >= 575 && info.rt < 625 && press==0) {
               points_high += 20}
-          else if (info.rt >= trial.reaction_time+250 && press==0) {
-              points_high  += 10}
+          else if (info.rt >= 625 && press==0) {
+              points_high += 10}
         if (press==0 && info.rt < 1000) {
-          display_element.append(function () {return "<p style='text-align:center; position: relative; top: -7.15pc; font-size: 40pt'>Punkte: "+points_high+" </p></div>"});
           display_element.append($('<div>', {
             html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/correct.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
         else if (press==0 && info.rt > 1000) {
-                display_element.append(function () {return "<p style='text-align:center; position: relative; top: -7.15pc; font-size: 40pt'>Punkte: "+points_high+" </p></div>"});
                 display_element.append($('<div>', {
                     html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
                     id: 'jspsych-single-stim-pic-prompt'
                 }))}
         else {
-          points_high = points_high - 30;
-          display_element.append(function () {return "<p style='text-align:center; position: relative; top: -7.15pc; font-size: 40pt'>Punkte: "+points_high+" </p></div>"});
+          points_high = points_high -30;
           display_element.append($('<div>', {
-            html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" src="img/incorrect.png">',
+            html: '<img style="top: 50%; position: relative; width:auto; height: auto; left: 70%" pt src="img/incorrect.png">',
               id: 'jspsych-single-stim-pic-prompt'
           }))}
       }
-
       pressed++;
       press = 1;
 
@@ -224,6 +210,7 @@ jsPsych.plugins["single-stim-special"] = (function() {
       }, trial.timing_response);
       setTimeoutHandlers.push(t2);
     }
+
   };
 
   return plugin;
