@@ -24,10 +24,6 @@
     </body>
     <script>
 
-        /* extra +1 second during timelapse */
-        /* add practice round */
-
-
         document.getElementById("countdown").style.visibility ='hidden';
         var timeInSecs;
         var ticker;
@@ -52,7 +48,7 @@
 
         var id = prompt('Bitte geben sie Ihren Probandencode ein:');
 
-        jsPsych.data.addProperties({subject: id});
+        jsPsych.data.addProperties({ProbandenCode: id});
 
         var nums = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,14],
             ranNums = [],
@@ -129,12 +125,19 @@
 
 
         var instructions_end = {
-            type: "text",
+            type: "single-stim",
             timing_stim: 1000,
+            timing_response: 1000,
+            is_html: true,
+            response_ends_trial: false,
             timing_post_trial: 0,
-            text: "Dies ist das Ende der Aufgabe <br><br><br> Vielen Dank"
+            stimulus: function () {return "<p>Dies ist das Ende der Aufgabe. <br><br><br> Vielen Dank</p>"}
         };
 
+        var tabbed_out = 0;
+        window.onblur = function() {
+            tabbed_out++;
+        };
 
             /* first, we want to define the possible sequence 1 and 2 (for round 1 and 2) */
 
@@ -1819,6 +1822,7 @@
                 display_element: $('#jspsych_target'),
                 default_iti: 0,
                 on_finish: function () {
+                    jsPsych.data.addProperties({zoomed_out: tabbed_out});
                     $.ajax({
                         type: "POST",
                         url: "/experiment-data",
@@ -1829,7 +1833,7 @@
                             window.location.href = "finish";
                         })
                         .fail(function () {
-                            alert("a problem occurred while writing to the database. plaese contact the research for more information.");
+                            alert("A problem occurred while writing to the database. Please contact the research team for more information.");
                             window.location.href = "/";
                         })
              }});
