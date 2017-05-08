@@ -1823,9 +1823,7 @@
                 fullscreen: true,
                 display_element: $('#jspsych_target'),
                 default_iti: 0,
-                on_finish: function() {
-                    jsPsych.data.displayData('csv');
-/*                on_finish: function () {
+                on_finish: function () {
                     jsPsych.data.addProperties({zoomed_out: tabbed_out});
                     $.ajax({
                         type: "POST",
@@ -1839,7 +1837,7 @@
                         .fail(function () {
                             alert("A problem occurred while writing to the database. Please contact the research team for more information.");
                             window.location.href = "/";
-                        }) */
+                        })
              }});
 
     </script>
