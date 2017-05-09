@@ -579,7 +579,6 @@
                 {timing_post_trial: 0, timing_response: delay5_1, data: {delay: delay5_1}}],
             on_finish: function () {
                 jsPsych.data.addDataToLastTrial({points: points_low});
-                save_data([jsPsych.data.getLastTrialData()]);
             }
         };
 
@@ -599,10 +598,10 @@
                 {timing_post_trial: 0, timing_response: delay2_8, data: {delay: delay2_8}},
                 {timing_post_trial: 0, timing_response: delay3_8, data: {delay: delay3_8}},
                 {timing_post_trial: 0, timing_response: delay4_8, data: {delay: delay4_8}},
-                {timing_post_trial: 0, timing_response: delay5_8, data: {delay: delay5_8}}],
+                {timing_post_trial: 0, timing_response: delay5_8, data: {delay: delay5_8},
+                on_finish: function() {save_data([jsPsych.data.getLastTrialData()])}}],
             on_finish: function () {
                 jsPsych.data.addDataToLastTrial({points: points_high});
-                save_data([jsPsych.data.getLastTrialData()]);
             }
         };
 
@@ -667,7 +666,6 @@
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_low});
-                save_data([jsPsych.data.getLastTrialData()]);
             }
         };
 
@@ -699,11 +697,10 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_9, data: {delay: delay5_9},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
-                save_data([jsPsych.data.getLastTrialData()]);
             }
    /*         on_finish: function (data, getSubjectData) {
                 if (data.rt >= 1 && data.rt <= (debrief_block - 150)) {
@@ -868,7 +865,8 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_11, data: {delay: delay5_11},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"},
+                    on_finish: function() {save_data([jsPsych.data.getLastTrialData()])}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
@@ -1085,7 +1083,8 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_14, data: {delay: delay5_14},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"},
+                    on_finish: function() {save_data([jsPsych.data.getLastTrialData()])}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
@@ -1301,7 +1300,8 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_2, data: {delay: delay5_2},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"},
+                    on_finish: function() {save_data([jsPsych.data.getLastTrialData()])}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
@@ -1339,7 +1339,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_11, data: {delay: delay5_11},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_low});
@@ -1373,7 +1373,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_3, data: {delay: delay5_3},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
@@ -1411,7 +1411,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_12, data: {delay: delay5_12},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_low});
@@ -1483,7 +1483,8 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_13, data: {delay: delay5_13},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"},
+                on_finish: function() {save_data([jsPsych.data.getLastTrialData()])}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_low});
@@ -1517,7 +1518,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_5,  data: {delay: delay5_5},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
@@ -1555,7 +1556,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_14,  data: {delay: delay5_14},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_low});
@@ -1589,7 +1590,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_6,  data: {delay: delay5_6},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
@@ -1627,7 +1628,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_15,  data: {delay: delay5_15},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_low+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_low});
@@ -1661,7 +1662,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_7,  data: {delay: delay5_7},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
@@ -1733,7 +1734,7 @@
                         return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
                 {timing_post_trial: 0, timing_response: delay5_8,  data: {delay: delay5_8},
                     prompt: function () {
-                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}},
+                        return "<p style='text-align:center; position: relative; top: -20pc; font-size: 40pt'>Punkte: "+points_high+" </p>"}}
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
