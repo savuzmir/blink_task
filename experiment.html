@@ -42,16 +42,9 @@
                 type: "POST",
                 url: "/experiment-data",
                 data: JSON.stringify(jsPsych.data.getData()),
-                contentType: "application/json"
-            })
-                .done(function () {
-                    window.location.href = "finish";
-                })
-                .fail(function () {
-                    alert("A problem occurred while writing to the database. Please contact the research team for more information.");
-                    window.location.href = "/";
-                })
-        }
+                contentType: "application/json",
+                success: function(output) { console.log(output);}
+            })}
 
 
         function tick() {
