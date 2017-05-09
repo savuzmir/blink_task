@@ -35,6 +35,25 @@
             ticker = setInterval("tick()",1000);   // every second
         }
 
+
+        function save_data() {
+            jsPsych.data.addProperties({zoomed_out: tabbed_out});
+            $.ajax({
+                type: "POST",
+                url: "/experiment-data",
+                data: JSON.stringify(jsPsych.data.getData()),
+                contentType: "application/json"
+            })
+                .done(function () {
+                    window.location.href = "finish";
+                })
+                .fail(function () {
+                    alert("A problem occurred while writing to the database. Please contact the research team for more information.");
+                    window.location.href = "/";
+                })
+        }
+
+
         function tick() {
             document.getElementById("countdown").style.visibility ='visible';
             var secs = timeInSecs;
@@ -567,6 +586,7 @@
                 {timing_post_trial: 0, timing_response: delay5_1, data: {delay: delay5_1}}],
             on_finish: function () {
                 jsPsych.data.addDataToLastTrial({points: points_low});
+                save_data([jsPsych.data.getLastTrialData()]);
             }
         };
 
@@ -589,6 +609,7 @@
                 {timing_post_trial: 0, timing_response: delay5_8, data: {delay: delay5_8}}],
             on_finish: function () {
                 jsPsych.data.addDataToLastTrial({points: points_high});
+                save_data([jsPsych.data.getLastTrialData()]);
             }
         };
 
@@ -653,6 +674,7 @@
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_low});
+                save_data([jsPsych.data.getLastTrialData()]);
             }
         };
 
@@ -688,6 +710,7 @@
             ],
             on_finish: function() {
                 jsPsych.data.addDataToLastTrial({points: points_high});
+                save_data([jsPsych.data.getLastTrialData()]);
             }
    /*         on_finish: function (data, getSubjectData) {
                 if (data.rt >= 1 && data.rt <= (debrief_block - 150)) {
